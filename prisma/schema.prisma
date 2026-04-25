@@ -1,0 +1,304 @@
+// Joytours B2C — Prisma schema
+// Tour-operator catalog + booking domain, plus Auth.js v5 tables.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// ───────────────────────── Auth.js v5 models ─────────────────────────
+
+model User {
+  id            String    @id @default(cuid())
+  email         String    @unique
+  emailVerified DateTime?
+  name          String?
+  image         String?
+  role          UserRole  @default(CUSTOMER)
+  locale        String    @default("en")
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  accounts Account[]
+  sessions Session[]
+  bookings Booking[]
+  reviews  Review[]
+}
+
+enum UserRole {
+  CUSTOMER
+  STAFF
+  ADMIN
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+  @@index([userId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+// ───────────────────────── Catalog ─────────────────────────
+
+model Destination {
+  id          String   @id @default(cuid())
+  slug        String   @unique
+  name        String
+  nameZh      String?
+  country     String
+  parentId    String?
+  heroImage   String?
+  description String?  @db.Text
+  sortOrder   Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  parent   Destination?  @relation("DestinationHierarchy", fields: [parentId], references: [id], onDelete: Restrict)
+  children Destination[] @relation("DestinationHierarchy")
+  tours    Tour[]        @relation("TourDestinations")
+
+  @@index([country])
+  @@index([parentId])
+}
+
+model Tour {
+  id            String     @id @default(cuid())
+  slug          String     @unique
+  title         String
+  titleZh       String?
+  summary       String     @db.Text
+  summaryZh     String?    @db.Text
+  description   String     @db.Text
+  descriptionZh String?    @db.Text
+  durationDays  Int
+  basePriceSgd  Decimal    @db.Decimal(10, 2)
+  heroImage     String?
+  gallery       String[]
+  highlights    String[]
+  included      String[]
+  excluded      String[]
+  status        TourStatus @default(DRAFT)
+  featured      Boolean    @default(false)
+  createdAt     DateTime   @default(now())
+  updatedAt     DateTime   @updatedAt
+
+  destinations Destination[]  @relation("TourDestinations")
+  itinerary    ItineraryDay[]
+  departures   Departure[]
+  reviews      Review[]
+
+  @@index([status, featured])
+}
+
+enum TourStatus {
+  DRAFT
+  PUBLISHED
+  ARCHIVED
+}
+
+model ItineraryDay {
+  id            String   @id @default(cuid())
+  tourId        String
+  dayNumber     Int
+  title         String
+  titleZh       String?
+  description   String   @db.Text
+  descriptionZh String?  @db.Text
+  meals         String[]
+  accommodation String?
+
+  tour Tour @relation(fields: [tourId], references: [id], onDelete: Cascade)
+
+  @@unique([tourId, dayNumber])
+}
+
+model Departure {
+  id        String          @id @default(cuid())
+  tourId    String
+  startDate DateTime        @db.Date
+  endDate   DateTime        @db.Date
+  priceSgd  Decimal         @db.Decimal(10, 2)
+  capacity  Int
+  booked    Int             @default(0)
+  status    DepartureStatus @default(OPEN)
+  createdAt DateTime        @default(now())
+  updatedAt DateTime        @updatedAt
+
+  tour     Tour      @relation(fields: [tourId], references: [id], onDelete: Cascade)
+  bookings Booking[]
+
+  @@index([tourId, startDate])
+  @@index([status, startDate])
+}
+
+enum DepartureStatus {
+  OPEN
+  FILLING
+  SOLD_OUT
+  CANCELLED
+  COMPLETED
+}
+
+// ───────────────────────── Booking ─────────────────────────
+
+model Booking {
+  id          String        @id @default(cuid())
+  reference   String        @unique @default(cuid())
+  userId      String?
+  departureId String
+  guestEmail  String
+  guestName   String
+  guestPhone  String?
+  paxCount    Int
+  totalSgd    Decimal       @db.Decimal(10, 2)
+  status      BookingStatus @default(PENDING)
+  notes       String?       @db.Text
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+
+  user      User?             @relation(fields: [userId], references: [id], onDelete: SetNull)
+  departure Departure         @relation(fields: [departureId], references: [id], onDelete: Restrict)
+  travelers BookingTraveler[]
+  payments  Payment[]
+
+  @@index([userId])
+  @@index([departureId])
+  @@index([status])
+}
+
+enum BookingStatus {
+  PENDING
+  CONFIRMED
+  PAID
+  CANCELLED
+  REFUNDED
+  COMPLETED
+}
+
+model BookingTraveler {
+  id          String    @id @default(cuid())
+  bookingId   String
+  fullName    String
+  passport    String?
+  dateOfBirth DateTime? @db.Date
+  nationality String?
+  dietary     String?
+
+  booking Booking @relation(fields: [bookingId], references: [id], onDelete: Cascade)
+
+  @@index([bookingId])
+}
+
+model Payment {
+  id          String        @id @default(cuid())
+  bookingId   String
+  amountSgd   Decimal       @db.Decimal(10, 2)
+  provider    String
+  providerRef String?
+  status      PaymentStatus @default(PENDING)
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+
+  booking Booking @relation(fields: [bookingId], references: [id], onDelete: Cascade)
+
+  @@index([bookingId])
+  @@index([providerRef])
+}
+
+enum PaymentStatus {
+  PENDING
+  SUCCEEDED
+  FAILED
+  REFUNDED
+}
+
+// ───────────────────────── Content ─────────────────────────
+
+model Review {
+  id        String   @id @default(cuid())
+  tourId    String
+  userId    String
+  rating    Int
+  title     String?
+  body      String   @db.Text
+  createdAt DateTime @default(now())
+
+  tour Tour @relation(fields: [tourId], references: [id], onDelete: Cascade)
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([tourId])
+  @@index([userId])
+}
+
+model Post {
+  id          String     @id @default(cuid())
+  slug        String     @unique
+  title       String
+  titleZh     String?
+  excerpt     String     @db.Text
+  body        String     @db.Text
+  bodyZh      String?    @db.Text
+  coverImage  String?
+  status      PostStatus @default(DRAFT)
+  publishedAt DateTime?
+  authorId    String?
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+
+  @@index([status, publishedAt])
+}
+
+enum PostStatus {
+  DRAFT
+  PUBLISHED
+  ARCHIVED
+}
+
+model Faq {
+  id         String   @id @default(cuid())
+  question   String
+  questionZh String?
+  answer     String   @db.Text
+  answerZh   String?  @db.Text
+  category   String?
+  sortOrder  Int      @default(0)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@index([category, sortOrder])
+}

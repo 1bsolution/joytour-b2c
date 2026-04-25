@@ -1,0 +1,58 @@
+{
+  "brand": {
+    "name": "Joytour",
+    "tagline": "From Singapore to the world."
+  },
+  "nav": {
+    "destinations": "Destinations",
+    "tours": "All Tours",
+    "about": "About Us",
+    "contact": "Contact Us",
+    "signIn": "Sign in",
+    "account": "My account",
+    "cart": "Cart",
+    "viewAllDestinations": "View all destinations"
+  },
+  "tours": {
+    "listTitle": "Upcoming tours",
+    "filters": {
+      "destination": "Destination",
+      "month": "Month",
+      "duration": "Duration",
+      "all": "All",
+      "reset": "Reset"
+    },
+    "from": "From",
+    "perPerson": "per person",
+    "nights": "{count, plural, one {# night} other {# nights}}",
+    "days": "{count, plural, one {# day} other {# days}}",
+    "viewDetails": "View details",
+    "empty": "No tours match these filters yet. Try clearing one."
+  },
+  "destinations": {
+    "indexKicker": "Where we go",
+    "indexTitle": "Two countries,",
+    "indexTitleAccent": "known intimately",
+    "indexBody": "We don't try to send you everywhere. We go deep into China and Japan — with twin-city itineraries when you want to see more without losing the thread.",
+    "regionsLabel": "Regions",
+    "viewSector": "View tours",
+    "browseAllRoutes": "Browse all routes",
+    "tourCardsTitle": "Tours in {sector}",
+    "tourCardsEmpty": "We're publishing departures for this region — check back soon, or send us an enquiry and we'll plan around your dates.",
+    "noTours": "Tours coming soon",
+    "back": "All destinations"
+  },
+  "footer": {
+    "rights": "©Copyright {year}. All Rights Reserved.",
+    "contact": "Contact",
+    "whatsapp": "WhatsApp",
+    "email": "Email",
+    "quickLink": "Quick Links",
+    "information": "Information",
+    "getInTouch": "Get in touch",
+    "terms": "Terms & Conditions",
+    "faq": "FAQ",
+    "address": "1 Park Road #02-10 People's Park Complex, Singapore 059108",
+    "social": "Social"
+  }
+}
