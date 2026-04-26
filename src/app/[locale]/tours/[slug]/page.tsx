@@ -192,7 +192,7 @@ function Hero({
   durationLabel: string;
 }) {
   return (
-    <section className="relative overflow-hidden bg-[#1a1a1a] text-white">
+    <section className="relative -mt-20 overflow-hidden bg-[#1a1a1a] text-white">
       <Image
         src={image}
         alt={title}
@@ -210,7 +210,7 @@ function Hero({
           opacity: 0.94,
         }}
       />
-      <div className="relative mx-auto flex min-h-[480px] max-w-6xl flex-col justify-end px-5 pb-16 pt-32 md:min-h-[560px] md:px-8 md:pb-20 md:pt-40">
+      <div className="relative mx-auto flex min-h-[520px] max-w-6xl flex-col justify-end px-5 pb-16 pt-36 md:min-h-[600px] md:px-8 md:pb-20 md:pt-44">
         <div className="flex flex-wrap items-center gap-2 text-[0.7rem] font-semibold uppercase tracking-[0.22em] text-[color:var(--brand-amber)]">
           <span>{country}</span>
           <span aria-hidden className="text-white/45">·</span>

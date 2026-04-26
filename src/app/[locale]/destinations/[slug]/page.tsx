@@ -203,7 +203,7 @@ function Hero({
   image: string;
 }) {
   return (
-    <section className="relative overflow-hidden bg-[#1a1a1a] text-white">
+    <section className="relative -mt-20 overflow-hidden bg-[#1a1a1a] text-white">
       <Image
         src={image}
         alt={title}
@@ -221,7 +221,7 @@ function Hero({
           opacity: 0.94,
         }}
       />
-      <div className="relative mx-auto flex min-h-[420px] max-w-6xl flex-col justify-end px-5 pb-16 pt-28 md:min-h-[480px] md:px-8 md:pb-20 md:pt-32">
+      <div className="relative mx-auto flex min-h-[460px] max-w-6xl flex-col justify-end px-5 pb-16 pt-36 md:min-h-[520px] md:px-8 md:pb-20 md:pt-40">
         <p className="text-[0.72rem] font-semibold uppercase tracking-[0.22em] text-[color:var(--brand-amber)]">
           {eyebrow}
         </p>

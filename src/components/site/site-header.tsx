@@ -1,15 +1,53 @@
-import Image from "next/image";
-import { getTranslations } from "next-intl/server";
-import { ChevronDown, ShoppingBag, UserRound } from "lucide-react";
-import { Link } from "@/i18n/navigation";
-import { destinations } from "@/lib/destinations";
+"use client";
 
-export async function SiteHeader() {
-  const t = await getTranslations("nav");
-  const tBrand = await getTranslations("brand");
+import { useEffect, useState } from "react";
+import Image from "next/image";
+import { useTranslations } from "next-intl";
+import { ChevronDown, ShoppingBag, UserRound } from "lucide-react";
+import { Link, usePathname } from "@/i18n/navigation";
+import { destinations } from "@/lib/destinations";
+import { cn } from "@/lib/utils";
+
+const SCROLL_THRESHOLD = 40;
+
+function pageAllowsTransparentHeader(pathname: string): boolean {
+  // Pages whose first content under the header is a full-bleed dark hero.
+  // Other pages keep the header opaque so the white nav doesn't sit on
+  // a white page.
+  if (pathname === "/") return true;
+  if (pathname.startsWith("/destinations/")) return true;
+  if (pathname.startsWith("/tours/")) return true;
+  return false;
+}
+
+export function SiteHeader() {
+  const t = useTranslations("nav");
+  const tBrand = useTranslations("brand");
+  const pathname = usePathname();
+  const allowTransparent = pageAllowsTransparentHeader(pathname);
+
+  const [scrolled, setScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  useEffect(() => {
+    if (!allowTransparent) return;
+    const onScroll = () => setScrolled(window.scrollY > SCROLL_THRESHOLD);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [allowTransparent]);
+
+  const isOpaque = !allowTransparent || scrolled || menuOpen;
 
   return (
-    <header className="sticky top-0 z-50 border-b border-[#E8E1D2] bg-white">
+    <header
+      className={cn(
+        "sticky top-0 z-50 transition-[background-color,border-color,backdrop-filter] duration-300 ease-out",
+        isOpaque
+          ? "border-b border-[#E8E1D2] bg-white/95 backdrop-blur-md"
+          : "border-b border-transparent bg-transparent"
+      )}
+    >
       <div className="mx-auto flex h-20 max-w-6xl items-center gap-8 px-5 md:px-8">
         <Link href="/" className="flex shrink-0 items-center">
           <Image
@@ -18,40 +56,64 @@ export async function SiteHeader() {
             width={180}
             height={120}
             priority
-            className="h-14 w-auto md:h-16"
+            className={cn(
+              "h-14 w-auto transition-[filter] duration-300 ease-out md:h-16",
+              isOpaque ? "" : "brightness-0 invert"
+            )}
           />
         </Link>
 
         <nav className="ml-auto hidden items-center gap-8 text-[0.82rem] font-medium uppercase tracking-[0.16em] md:flex">
-          <Link
-            href="/about"
-            className="text-[color:var(--brand-text)] transition hover:text-[color:var(--brand-orange)]"
-          >
+          <NavLink href="/about" isOpaque={isOpaque}>
             {t("about")}
-          </Link>
+          </NavLink>
 
-          <DestinationsMenu label={t("destinations")} viewAllLabel={t("viewAllDestinations")} />
+          <DestinationsMenu
+            label={t("destinations")}
+            viewAllLabel={t("viewAllDestinations")}
+            isOpaque={isOpaque}
+            onOpenChange={setMenuOpen}
+          />
 
-          <Link
-            href="/contact"
-            className="text-[color:var(--brand-text)] transition hover:text-[color:var(--brand-orange)]"
-          >
+          <NavLink href="/contact" isOpaque={isOpaque}>
             {t("contact")}
-          </Link>
+          </NavLink>
         </nav>
 
         <div className="ml-auto flex items-center gap-3 md:ml-0 md:gap-4">
           <Link
+            href="/tours"
+            className={cn(
+              "hidden h-10 items-center rounded-full px-5 text-[0.78rem] font-semibold uppercase tracking-[0.16em] transition-[background-color,color,border-color] duration-300 ease-out lg:inline-flex",
+              isOpaque
+                ? "bg-[color:var(--brand-text)] text-white hover:bg-[color:var(--brand-orange)]"
+                : "bg-[color:var(--brand-amber)] text-[color:var(--brand-text)] hover:bg-white"
+            )}
+          >
+            Find a Journey
+          </Link>
+
+          <Link
             href="/sign-in"
             aria-label={t("signIn")}
-            className="hidden size-9 place-items-center rounded-full text-[color:var(--brand-text)] transition hover:bg-[#FFF4E6] hover:text-[color:var(--brand-orange)] sm:grid"
+            className={cn(
+              "hidden size-9 place-items-center rounded-full transition-[background-color,color] duration-300 ease-out sm:grid",
+              isOpaque
+                ? "text-[color:var(--brand-text)] hover:bg-[#FFF4E6] hover:text-[color:var(--brand-orange)]"
+                : "text-white hover:bg-white/15"
+            )}
           >
             <UserRound className="size-[18px]" />
           </Link>
           <Link
             href="/cart"
             aria-label={t("cart")}
-            className="grid size-9 place-items-center rounded-full text-[color:var(--brand-text)] transition hover:bg-[#FFF4E6] hover:text-[color:var(--brand-orange)]"
+            className={cn(
+              "grid size-9 place-items-center rounded-full transition-[background-color,color] duration-300 ease-out",
+              isOpaque
+                ? "text-[color:var(--brand-text)] hover:bg-[#FFF4E6] hover:text-[color:var(--brand-orange)]"
+                : "text-white hover:bg-white/15"
+            )}
           >
             <ShoppingBag className="size-[18px]" />
           </Link>
@@ -61,19 +123,62 @@ export async function SiteHeader() {
   );
 }
 
+function NavLink({
+  href,
+  isOpaque,
+  children,
+}: {
+  href: string;
+  isOpaque: boolean;
+  children: React.ReactNode;
+}) {
+  return (
+    <Link
+      href={href}
+      className={cn(
+        "transition-colors duration-300 ease-out",
+        isOpaque
+          ? "text-[color:var(--brand-text)] hover:text-[color:var(--brand-orange)]"
+          : "text-white hover:text-[color:var(--brand-amber)]"
+      )}
+    >
+      {children}
+    </Link>
+  );
+}
+
 function DestinationsMenu({
   label,
   viewAllLabel,
+  isOpaque,
+  onOpenChange,
 }: {
   label: string;
   viewAllLabel: string;
+  isOpaque: boolean;
+  onOpenChange: (open: boolean) => void;
 }) {
   return (
-    <div className="group relative">
+    <div
+      className="group relative"
+      onMouseEnter={() => onOpenChange(true)}
+      onMouseLeave={() => onOpenChange(false)}
+      onFocus={() => onOpenChange(true)}
+      onBlur={(e) => {
+        if (!e.currentTarget.contains(e.relatedTarget as Node)) {
+          onOpenChange(false);
+        }
+      }}
+    >
       <Link
         href="/destinations"
         aria-haspopup="true"
-        className="inline-flex items-center gap-1.5 text-[color:var(--brand-text)] transition hover:text-[color:var(--brand-orange)]"
+        className={cn(
+          "inline-flex items-center gap-1.5 transition-colors duration-300 ease-out",
+          isOpaque
+            ? "text-[color:var(--brand-text)] hover:text-[color:var(--brand-orange)]"
+            : "text-white hover:text-[color:var(--brand-amber)]"
+        )}
       >
         {label}
         <ChevronDown className="size-3 transition group-hover:rotate-180" aria-hidden />

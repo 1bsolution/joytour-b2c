@@ -189,7 +189,7 @@ function FeaturedTours({ tours }: { tours: Awaited<ReturnType<typeof listFeature
 
 function Hero() {
   return (
-    <section className="relative overflow-hidden bg-[#1a1a1a] text-white">
+    <section className="relative -mt-20 overflow-hidden bg-[#1a1a1a] text-white">
       <Image
         src={images.hero}
         alt="Mountains in morning mist"
