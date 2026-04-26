@@ -40,14 +40,15 @@ export function SiteHeader() {
   const isOpaque = !allowTransparent || scrolled || menuOpen;
 
   return (
-    <header
-      className={cn(
-        "sticky top-0 z-50 transition-[background-color,border-color,backdrop-filter] duration-300 ease-out",
-        isOpaque
-          ? "border-b border-[#E8E1D2] bg-white/95 backdrop-blur-md"
-          : "border-b border-transparent bg-transparent"
-      )}
-    >
+    <>
+      <header
+        className={cn(
+          "fixed inset-x-0 top-0 z-50 transition-[background-color,border-color,backdrop-filter] duration-300 ease-out",
+          isOpaque
+            ? "border-b border-[#E8E1D2] bg-white/95 backdrop-blur-md"
+            : "border-b border-transparent bg-transparent"
+        )}
+      >
       <div className="mx-auto flex h-20 max-w-6xl items-center gap-8 px-5 md:px-8">
         <Link href="/" className="flex shrink-0 items-center">
           <Image
@@ -119,7 +120,12 @@ export function SiteHeader() {
           </Link>
         </div>
       </div>
-    </header>
+      </header>
+      {/* Pages with a dark hero behind the header don't need a spacer — the
+        hero starts at the top of the viewport. Other pages get an 80px
+        spacer in the flex flow so content doesn't sit under the fixed bar. */}
+      {!allowTransparent && <div aria-hidden className="h-20 shrink-0" />}
+    </>
   );
 }
 

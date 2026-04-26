@@ -203,7 +203,7 @@ function Hero({
   image: string;
 }) {
   return (
-    <section className="relative -mt-20 overflow-hidden bg-[#1a1a1a] text-white">
+    <section className="relative overflow-hidden bg-[#1a1a1a] text-white">
       <Image
         src={image}
         alt={title}
