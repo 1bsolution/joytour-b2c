@@ -1,9 +1,12 @@
 import { ImageResponse } from "next/og";
+import { loadFredoka700 } from "@/lib/icon-font";
 
 export const size = { width: 180, height: 180 };
 export const contentType = "image/png";
 
-export default function AppleIcon() {
+export default async function AppleIcon() {
+  const fontData = await loadFredoka700();
+
   return new ImageResponse(
     (
       <div
@@ -15,15 +18,20 @@ export default function AppleIcon() {
           justifyContent: "center",
           background: "#ff7900",
           color: "#ffffff",
-          fontSize: 102,
-          fontWeight: 800,
-          letterSpacing: "-0.04em",
-          fontFamily: "system-ui, -apple-system, sans-serif",
+          fontSize: 108,
+          fontFamily: "Fredoka",
+          fontWeight: 700,
+          letterSpacing: "-0.05em",
         }}
       >
         JT
       </div>
     ),
-    { ...size }
+    {
+      ...size,
+      fonts: [
+        { name: "Fredoka", data: fontData, weight: 700, style: "normal" },
+      ],
+    }
   );
 }
