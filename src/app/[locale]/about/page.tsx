@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { setRequestLocale } from "next-intl/server";
 import {
   ArrowRight,
@@ -51,16 +50,7 @@ function Hero() {
             "radial-gradient(ellipse at top, rgba(80,190,180,0.22) 0%, transparent 55%), radial-gradient(ellipse at bottom right, rgba(250,90,10,0.18) 0%, transparent 50%)",
         }}
       />
-      <div className="relative mx-auto flex min-h-[560px] max-w-6xl flex-col justify-end px-5 pb-20 pt-36 md:min-h-[640px] md:px-8 md:pb-24 md:pt-44">
-        <Image
-          src="/joytour-logo-master.png"
-          alt=""
-          aria-hidden
-          width={1392}
-          height={911}
-          priority
-          className="mb-10 h-20 w-auto md:h-24"
-        />
+      <div className="relative mx-auto flex min-h-[480px] max-w-6xl flex-col justify-end px-5 pb-20 pt-36 md:min-h-[560px] md:px-8 md:pb-24 md:pt-44">
         <p className="text-[0.78rem] font-semibold uppercase tracking-[0.22em] text-[color:var(--brand-teal)]">
           About us · Joytour Holidays
         </p>
