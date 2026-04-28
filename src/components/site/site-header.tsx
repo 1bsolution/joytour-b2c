@@ -62,16 +62,16 @@ export function SiteHeader() {
         </Link>
 
         <nav className="ml-auto hidden items-center gap-8 text-[0.82rem] font-medium uppercase tracking-[0.16em] md:flex">
-          <NavLink href="/about" isOpaque={isOpaque}>
-            {t("about")}
-          </NavLink>
-
           <DestinationsMenu
             label={t("destinations")}
             viewAllLabel={t("viewAllDestinations")}
             isOpaque={isOpaque}
             onOpenChange={setMenuOpen}
           />
+
+          <NavLink href="/about" isOpaque={isOpaque}>
+            {t("about")}
+          </NavLink>
 
           <NavLink href="/contact" isOpaque={isOpaque}>
             {t("contact")}
