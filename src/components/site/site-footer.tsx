@@ -33,7 +33,7 @@ export async function SiteFooter() {
         </FooterColumn>
 
         <FooterColumn title={t("information")}>
-          <FooterLink href="/about">{t("terms")}</FooterLink>
+          <FooterLink href="/terms">{t("terms")}</FooterLink>
           <FooterLink href="/contact">{t("faq")}</FooterLink>
         </FooterColumn>
 
