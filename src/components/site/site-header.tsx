@@ -52,15 +52,12 @@ export function SiteHeader() {
       <div className="mx-auto flex h-20 max-w-6xl items-center gap-8 px-5 md:px-8">
         <Link href="/" className="flex shrink-0 items-center">
           <Image
-            src="/joytour-logo-gold.webp"
+            src="/joytour-logo-master.png"
             alt={tBrand("name")}
-            width={180}
-            height={120}
+            width={1392}
+            height={911}
             priority
-            className={cn(
-              "h-14 w-auto transition-[filter] duration-300 ease-out md:h-16",
-              isOpaque ? "" : "brightness-0 invert"
-            )}
+            className="h-12 w-auto md:h-14"
           />
         </Link>
 
