@@ -16,9 +16,9 @@ export async function TourCard({ tour }: TourCardProps) {
   return (
     <Link
       href={`/tours/${tour.slug}`}
-      className="group flex h-full flex-col overflow-hidden rounded-[24px] bg-white ring-1 ring-[#E8E1D2] transition hover:ring-[color:var(--brand-orange)] hover:shadow-[0_18px_40px_-22px_rgba(43,43,43,0.32)]"
+      className="group flex h-full flex-col overflow-hidden rounded-[24px] bg-white ring-1 ring-[color:var(--brand-border)] transition hover:ring-[color:var(--brand-orange)] hover:shadow-[0_18px_40px_-22px_rgba(43,43,43,0.32)]"
     >
-      <div className="relative aspect-square w-full overflow-hidden bg-[#FFF4E6]">
+      <div className="relative aspect-square w-full overflow-hidden bg-[color:var(--brand-cream)]">
         {tour.heroImage ? (
           <Image
             src={tour.heroImage}
@@ -51,7 +51,7 @@ export async function TourCard({ tour }: TourCardProps) {
             {tour.destinations.slice(0, 3).map((d) => (
               <span
                 key={d.slug}
-                className="inline-flex items-center rounded-full bg-[#FFF4E6] px-3 py-1 text-[0.7rem] font-medium uppercase tracking-[0.14em] text-[color:var(--brand-gold)]"
+                className="inline-flex items-center rounded-full bg-[color:var(--brand-teal-soft)] px-3 py-1 text-[0.7rem] font-semibold uppercase tracking-[0.14em] text-[color:var(--brand-teal-deep)]"
               >
                 {d.name}
               </span>
@@ -62,8 +62,8 @@ export async function TourCard({ tour }: TourCardProps) {
         <div
           className={
             tour.destinations.length > 0
-              ? "flex items-end justify-between gap-3 border-t border-[#F1E8D6] pt-4"
-              : "mt-auto flex items-end justify-between gap-3 border-t border-[#F1E8D6] pt-4"
+              ? "flex items-end justify-between gap-3 border-t border-[color:var(--brand-divider)] pt-4"
+              : "mt-auto flex items-end justify-between gap-3 border-t border-[color:var(--brand-divider)] pt-4"
           }
         >
           <div>

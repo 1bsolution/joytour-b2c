@@ -85,6 +85,8 @@
   --brand-paper: #FAF9F6;         /* neutral paper surface */
   --brand-grey-soft: #F6F6F6;     /* alt section bg */
   --brand-grey-cool: #F4F8FB;     /* cool section bg */
+  --brand-border: #E8E1D2;        /* warm hairline border */
+  --brand-divider: #F1E8D6;       /* softer hairline (inside warm cards) */
   --brand-ink: #1A1A1A;           /* deepest ink — heading default */
   --brand-text: #2B2B2B;          /* body text */
   --brand-muted: #525252;         /* secondary body text */

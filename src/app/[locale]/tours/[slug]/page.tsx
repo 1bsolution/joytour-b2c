@@ -68,7 +68,7 @@ export default async function TourDetailPage({
                   {parsed.items.map((item) => (
                     <li
                       key={item.title}
-                      className="flex gap-4 rounded-[20px] bg-[#FFF4E6] p-5"
+                      className="flex gap-4 rounded-[20px] bg-[color:var(--brand-cream)] p-5"
                     >
                       <Check
                         className="mt-1 size-4 shrink-0 text-[color:var(--brand-orange)]"
@@ -102,7 +102,7 @@ export default async function TourDetailPage({
           </div>
 
           <aside className="lg:sticky lg:top-28 lg:self-start">
-            <div className="rounded-[28px] border border-[#E8E1D2] bg-white p-7 shadow-[0_18px_40px_-22px_rgba(43,43,43,0.18)] md:p-8">
+            <div className="rounded-[28px] border border-[color:var(--brand-border)] bg-white p-7 shadow-[0_18px_40px_-22px_rgba(43,43,43,0.18)] md:p-8">
               <p className="text-[0.7rem] font-medium uppercase tracking-[0.22em] text-[color:var(--brand-muted)]">
                 From
               </p>
@@ -113,7 +113,7 @@ export default async function TourDetailPage({
                 per person, twin-share
               </p>
 
-              <ul className="mt-6 space-y-3 border-t border-[#F1E8D6] pt-6 text-[0.95rem] text-[color:var(--brand-text)]">
+              <ul className="mt-6 space-y-3 border-t border-[color:var(--brand-divider)] pt-6 text-[0.95rem] text-[color:var(--brand-text)]">
                 <Fact icon={Clock3} label="Duration" value={`${tour.durationDays} days · ${tour.durationNights} nights`} />
                 <Fact icon={Globe2} label="Country" value={tour.country === "china" ? "China" : "Japan"} />
                 <Fact
@@ -132,7 +132,7 @@ export default async function TourDetailPage({
                 href="https://wa.me/6586299765"
                 target="_blank"
                 rel="noreferrer"
-                className="mt-3 inline-flex h-11 w-full items-center justify-center gap-2 rounded-full border border-[#E8E1D2] text-[0.9rem] font-medium text-[color:var(--brand-text)] transition hover:border-[color:var(--brand-orange)] hover:text-[color:var(--brand-orange)]"
+                className="mt-3 inline-flex h-11 w-full items-center justify-center gap-2 rounded-full border border-[color:var(--brand-border)] text-[0.9rem] font-medium text-[color:var(--brand-text)] transition hover:border-[color:var(--brand-orange)] hover:text-[color:var(--brand-orange)]"
               >
                 WhatsApp +65 8629 9765
               </a>
@@ -146,7 +146,7 @@ export default async function TourDetailPage({
       </section>
 
       {similar.length > 0 && (
-        <section className="bg-[#FFF4E6] px-5 py-24 md:px-8 md:py-28">
+        <section className="bg-[color:var(--brand-cream)] px-5 py-24 md:px-8 md:py-28">
           <div className="mx-auto max-w-6xl">
             <div className="grid items-end gap-6 md:grid-cols-[1fr_auto]">
               <div>
@@ -192,7 +192,7 @@ function Hero({
   durationLabel: string;
 }) {
   return (
-    <section className="relative overflow-hidden bg-[#1a1a1a] text-white">
+    <section className="relative overflow-hidden bg-[color:var(--brand-ink)] text-white">
       <Image
         src={image}
         alt={title}

@@ -15,7 +15,7 @@ export default async function DestinationsPage({
 
   return (
     <>
-      <header className="bg-[#FFF4E6] px-5 pb-20 pt-28 md:px-8 md:pb-24 md:pt-32">
+      <header className="bg-[color:var(--brand-cream)] px-5 pb-20 pt-28 md:px-8 md:pb-24 md:pt-32">
         <div className="mx-auto max-w-6xl">
           <p className="kicker">{t("indexKicker")}</p>
           <h1 className="mt-4 max-w-3xl">
@@ -37,7 +37,7 @@ export default async function DestinationsPage({
               <div className="grid items-center gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
                 <Link
                   href={`/destinations/${country.slug}`}
-                  className="group relative block aspect-[5/4] overflow-hidden rounded-[28px] bg-[#1a1a1a]"
+                  className="group relative block aspect-[5/4] overflow-hidden rounded-[28px] bg-[color:var(--brand-ink)]"
                 >
                   <Image
                     src={country.heroImage}
@@ -74,7 +74,7 @@ export default async function DestinationsPage({
                         <li key={sector.slug}>
                           <Link
                             href={`/destinations/${sector.slug}`}
-                            className="inline-flex items-center rounded-full border border-[#E8E1D2] bg-white px-4 py-2 text-[0.85rem] font-medium text-[color:var(--brand-text)] transition hover:border-[color:var(--brand-orange)] hover:bg-[#FFF4E6] hover:text-[color:var(--brand-orange)]"
+                            className="inline-flex items-center rounded-full border border-[color:var(--brand-border)] bg-white px-4 py-2 text-[0.85rem] font-medium text-[color:var(--brand-text)] transition hover:border-[color:var(--brand-orange)] hover:bg-[color:var(--brand-cream)] hover:text-[color:var(--brand-orange)]"
                           >
                             {sector.name}
                           </Link>

@@ -45,7 +45,7 @@ export function SiteHeader() {
         className={cn(
           "fixed inset-x-0 top-0 z-50 transition-[background-color,border-color,backdrop-filter] duration-300 ease-out",
           isOpaque
-            ? "border-b border-[#E8E1D2] bg-white/95 backdrop-blur-md"
+            ? "border-b border-[color:var(--brand-border)] bg-white/95 backdrop-blur-md"
             : "border-b border-transparent bg-transparent"
         )}
       >
@@ -195,7 +195,7 @@ function DestinationsMenu({
         aria-label={label}
         className="invisible absolute left-1/2 top-full z-50 -translate-x-1/2 pt-4 opacity-0 transition duration-150 group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100"
       >
-        <div className="rounded-[20px] bg-white p-7 shadow-[0_24px_60px_-22px_rgba(43,43,43,0.32)] ring-1 ring-[#E8E1D2]">
+        <div className="rounded-[20px] bg-white p-7 shadow-[0_24px_60px_-22px_rgba(43,43,43,0.32)] ring-1 ring-[color:var(--brand-border)]">
           <div className="grid gap-x-12 gap-y-6 md:grid-cols-[1fr_1fr]">
             {destinations.map((country) => (
               <div key={country.slug} className="min-w-[10rem]">
@@ -220,7 +220,7 @@ function DestinationsMenu({
               </div>
             ))}
           </div>
-          <div className="mt-7 flex items-center justify-between border-t border-[#F1E8D6] pt-5">
+          <div className="mt-7 flex items-center justify-between border-t border-[color:var(--brand-divider)] pt-5">
             <Link
               href="/destinations"
               className="inline-flex items-center text-[0.78rem] font-semibold uppercase tracking-[0.16em] text-[color:var(--brand-orange)] transition hover:text-[color:var(--brand-amber)]"

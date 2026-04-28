@@ -44,7 +44,7 @@ export default async function ToursPage({
 
   return (
     <>
-      <header className="bg-[#FFF4E6] px-5 pb-16 pt-28 md:px-8 md:pb-20 md:pt-32">
+      <header className="bg-[color:var(--brand-cream)] px-5 pb-16 pt-28 md:px-8 md:pb-20 md:pt-32">
         <div className="mx-auto max-w-6xl">
           <p className="kicker">Routes</p>
           <h1 className="mt-4 max-w-3xl">
@@ -56,7 +56,7 @@ export default async function ToursPage({
             confirm dates and pricing for your group within one business day.
           </p>
           {filterLabel && (
-            <div className="mt-8 inline-flex items-center gap-3 rounded-full border border-[#E8E1D2] bg-white py-2 pl-4 pr-2 text-[0.9rem] text-[color:var(--brand-text)]">
+            <div className="mt-8 inline-flex items-center gap-3 rounded-full border border-[color:var(--brand-border)] bg-white py-2 pl-4 pr-2 text-[0.9rem] text-[color:var(--brand-text)]">
               <span className="font-medium capitalize">{filterLabel}</span>
               <Link
                 href="/tours"
@@ -79,7 +79,7 @@ export default async function ToursPage({
           </div>
 
           {tours.length === 0 ? (
-            <div className="rounded-[28px] border border-[#E8E1D2] bg-[#FFF4E6] p-10 text-center md:p-14">
+            <div className="rounded-[28px] border border-[color:var(--brand-border)] bg-[color:var(--brand-cream)] p-10 text-center md:p-14">
               <p className="font-display text-[1.5rem] font-bold text-[color:var(--brand-gold)]">
                 No routes match these filters
               </p>
@@ -93,7 +93,7 @@ export default async function ToursPage({
                 </Link>
                 <Link
                   href="/contact"
-                  className="inline-flex h-12 items-center rounded-full border border-[#E8E1D2] px-7 text-[0.95rem] font-medium text-[color:var(--brand-text)] transition hover:border-[color:var(--brand-orange)] hover:text-[color:var(--brand-orange)]"
+                  className="inline-flex h-12 items-center rounded-full border border-[color:var(--brand-border)] px-7 text-[0.95rem] font-medium text-[color:var(--brand-text)] transition hover:border-[color:var(--brand-orange)] hover:text-[color:var(--brand-orange)]"
                 >
                   Plan a custom route
                 </Link>
@@ -120,7 +120,7 @@ function CountryFilter({ active }: { active?: "china" | "japan" }) {
   ];
 
   return (
-    <div className="hidden items-center gap-1 rounded-full border border-[#E8E1D2] p-1 text-[0.82rem] sm:inline-flex">
+    <div className="hidden items-center gap-1 rounded-full border border-[color:var(--brand-border)] p-1 text-[0.82rem] sm:inline-flex">
       {options.map((opt) => {
         const isActive = (active ?? undefined) === opt.slug;
         return (

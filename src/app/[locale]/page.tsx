@@ -153,7 +153,7 @@ function FeaturedTours({ tours }: { tours: Awaited<ReturnType<typeof listFeature
   if (tours.length === 0) return null;
 
   return (
-    <section className="bg-[color:var(--brand-grey-cool)] px-5 py-24 md:px-8 md:py-32">
+    <section className="bg-[color:var(--brand-teal-soft)] px-5 py-24 md:px-8 md:py-32">
       <div className="mx-auto max-w-6xl">
         <div className="grid items-end gap-6 md:grid-cols-[1.3fr_1fr] md:gap-12">
           <div>
@@ -189,7 +189,7 @@ function FeaturedTours({ tours }: { tours: Awaited<ReturnType<typeof listFeature
 
 function Hero() {
   return (
-    <section className="relative overflow-hidden bg-[#1a1a1a] text-white">
+    <section className="relative overflow-hidden bg-[color:var(--brand-ink)] text-white">
       <Image
         src={images.hero}
         alt="Mountains in morning mist"
@@ -247,7 +247,7 @@ function SearchPanel() {
           return (
             <label
               key={field.label}
-              className="flex h-14 items-center gap-3 rounded-2xl bg-[#FFF4E6] px-5 text-left"
+              className="flex h-14 items-center gap-3 rounded-2xl bg-[color:var(--brand-cream)] px-5 text-left"
             >
               <Icon className="size-4 text-[color:var(--brand-orange)]" aria-hidden />
               <span className="min-w-0 flex-1">
@@ -275,7 +275,7 @@ function AboutSection() {
     <section className="bg-white px-5 pb-24 pt-28 md:px-8 md:pb-32 md:pt-36">
       <div className="mx-auto grid max-w-6xl items-center gap-16 lg:grid-cols-[1fr_1.05fr] lg:gap-20">
         <div className="relative aspect-[4/5] max-w-md">
-          <div className="absolute left-0 top-0 h-[68%] w-[72%] overflow-hidden rounded-[28px] bg-[#FFF4E6]">
+          <div className="absolute left-0 top-0 h-[68%] w-[72%] overflow-hidden rounded-[28px] bg-[color:var(--brand-cream)]">
             <Image
               src={images.aboutPrimary}
               alt="Forbidden City courtyard at golden hour"
@@ -284,7 +284,7 @@ function AboutSection() {
               className="object-cover"
             />
           </div>
-          <div className="absolute bottom-0 right-0 h-[58%] w-[62%] overflow-hidden rounded-[28px] border-[6px] border-white bg-[#FFF4E6] shadow-[0_18px_40px_-18px_rgba(43,43,43,0.42)]">
+          <div className="absolute bottom-0 right-0 h-[58%] w-[62%] overflow-hidden rounded-[28px] border-[6px] border-white bg-[color:var(--brand-cream)] shadow-[0_18px_40px_-18px_rgba(43,43,43,0.42)]">
             <Image
               src={images.aboutSecondary}
               alt="Quiet street in Kyoto"
@@ -310,11 +310,11 @@ function AboutSection() {
           </div>
 
           <div className="mt-10 grid gap-6 sm:grid-cols-[1.1fr_auto] sm:items-center">
-            <div className="rounded-[24px] bg-[color:var(--brand-gold)] p-7 text-white">
+            <div className="rounded-[24px] bg-[color:var(--brand-teal-deep)] p-7 text-white">
               <h3 className="font-display text-[1.5rem] font-bold leading-[1.1] tracking-[0.005em] text-white">
                 {copy.trustTitle}
               </h3>
-              <p className="mt-3 text-[0.95rem] leading-[1.65] text-white/82">
+              <p className="mt-3 text-[0.95rem] leading-[1.65] text-white/85">
                 {copy.trustBody}
               </p>
             </div>
@@ -352,7 +352,7 @@ function AboutSection() {
 
 function CountriesSection() {
   return (
-    <section className="bg-[#FFF4E6] px-5 py-24 md:px-8 md:py-32">
+    <section className="bg-[color:var(--brand-cream)] px-5 py-24 md:px-8 md:py-32">
       <div className="mx-auto max-w-6xl">
         <div className="grid items-end gap-8 md:grid-cols-[1.1fr_1fr]">
           <div>
@@ -405,7 +405,7 @@ function CountryCard({ href, label, body, image, alt, cta }: CountryCardProps) {
   return (
     <Link
       href={href}
-      className="group relative flex aspect-[5/6] flex-col justify-end overflow-hidden rounded-[28px] bg-[#1a1a1a] text-white md:aspect-[4/5]"
+      className="group relative flex aspect-[5/6] flex-col justify-end overflow-hidden rounded-[28px] bg-[color:var(--brand-ink)] text-white md:aspect-[4/5]"
     >
       <Image
         src={image}
@@ -480,9 +480,9 @@ function WhyChooseUs() {
                     </span>
                   </span>
                 </div>
-                <div className="h-[6px] w-full overflow-hidden rounded-full bg-[color:var(--brand-grey-soft)]">
+                <div className="h-[6px] w-full overflow-hidden rounded-full bg-[color:var(--brand-teal-soft)]">
                   <div
-                    className="h-full rounded-full bg-gradient-to-r from-[color:var(--brand-orange)] to-[color:var(--brand-amber)]"
+                    className="h-full rounded-full bg-gradient-to-r from-[color:var(--brand-orange)] to-[color:var(--brand-teal)]"
                     style={{ width: `${stat.value}%` }}
                   />
                 </div>
@@ -514,7 +514,7 @@ function FaqContact() {
             {copy.faqItems.map((item, index) => (
               <details
                 key={item.q}
-                className="group overflow-hidden rounded-[18px] bg-[#FFF4E6] transition open:bg-[color:var(--brand-orange)] open:text-white"
+                className="group overflow-hidden rounded-[18px] bg-[color:var(--brand-cream)] transition open:bg-[color:var(--brand-orange)] open:text-white"
                 open={index === 0}
               >
                 <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-6 py-5 text-[1rem] font-medium text-[color:var(--brand-text)] transition group-open:text-white">
@@ -529,7 +529,7 @@ function FaqContact() {
           </div>
         </div>
 
-        <div className="rounded-[28px] bg-[#FFF4E6] p-8 md:p-10">
+        <div className="rounded-[28px] bg-[color:var(--brand-cream)] p-8 md:p-10">
           <h3 className="max-w-md font-display text-[clamp(1.5rem,1.2rem+1vw,1.875rem)] font-bold leading-[1.18] tracking-[0.005em] text-[color:var(--brand-gold)]">
             {copy.contactTitle}
           </h3>
@@ -604,7 +604,7 @@ function FormInput({
   required,
 }: FormInputProps) {
   const baseClass =
-    "w-full rounded-2xl bg-white border border-transparent px-5 py-3.5 text-[1rem] text-[color:var(--brand-text)] outline-none transition placeholder:text-[color:var(--brand-muted)]/65 focus:border-[color:var(--brand-orange)] focus:shadow-[0_0_0_3px_rgba(233,124,0,0.12)]";
+    "w-full rounded-2xl bg-white border border-transparent px-5 py-3.5 text-[1rem] text-[color:var(--brand-text)] outline-none transition placeholder:text-[color:var(--brand-muted)]/65 focus:border-[color:var(--brand-orange)] focus:shadow-[0_0_0_3px_rgba(250,90,10,0.15)]";
 
   return (
     <label className="block">

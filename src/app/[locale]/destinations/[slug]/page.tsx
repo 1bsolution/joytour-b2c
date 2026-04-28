@@ -82,7 +82,7 @@ async function CountryView({ country }: { country: Country }) {
       </section>
 
       {tours.length > 0 && (
-        <section className="bg-[#FFF4E6] px-5 py-24 md:px-8 md:py-28">
+        <section className="bg-[color:var(--brand-cream)] px-5 py-24 md:px-8 md:py-28">
           <div className="mx-auto max-w-6xl">
             <div className="grid items-end gap-6 md:grid-cols-[1fr_auto] md:gap-12">
               <div>
@@ -159,7 +159,7 @@ async function SectorView({
           </div>
 
           {tours.length === 0 ? (
-            <div className="mt-12 rounded-[28px] border border-[#E8E1D2] bg-[#FFF4E6] p-10 md:p-14">
+            <div className="mt-12 rounded-[28px] border border-[color:var(--brand-border)] bg-[color:var(--brand-cream)] p-10 md:p-14">
               <p className="font-display text-[1.5rem] font-bold leading-tight text-[color:var(--brand-gold)]">
                 {t("noTours")}
               </p>
@@ -172,7 +172,7 @@ async function SectorView({
                 </Link>
                 <Link
                   href={`/destinations/${country.slug}`}
-                  className="inline-flex h-12 items-center rounded-full border border-[#E8E1D2] bg-white px-7 text-[0.95rem] font-medium text-[color:var(--brand-text)] transition hover:border-[color:var(--brand-orange)] hover:text-[color:var(--brand-orange)]"
+                  className="inline-flex h-12 items-center rounded-full border border-[color:var(--brand-border)] bg-white px-7 text-[0.95rem] font-medium text-[color:var(--brand-text)] transition hover:border-[color:var(--brand-orange)] hover:text-[color:var(--brand-orange)]"
                 >
                   Browse other {country.name} regions
                 </Link>
@@ -203,7 +203,7 @@ function Hero({
   image: string;
 }) {
   return (
-    <section className="relative overflow-hidden bg-[#1a1a1a] text-white">
+    <section className="relative overflow-hidden bg-[color:var(--brand-ink)] text-white">
       <Image
         src={image}
         alt={title}
@@ -240,9 +240,9 @@ function SectorTile({ sector, viewLabel }: { sector: Sector; viewLabel: string }
   return (
     <Link
       href={`/destinations/${sector.slug}`}
-      className="group flex flex-col overflow-hidden rounded-[24px] bg-white ring-1 ring-[#E8E1D2] transition hover:ring-[color:var(--brand-orange)]"
+      className="group flex flex-col overflow-hidden rounded-[24px] bg-white ring-1 ring-[color:var(--brand-border)] transition hover:ring-[color:var(--brand-orange)]"
     >
-      <div className="relative aspect-[5/4] overflow-hidden bg-[#1a1a1a]">
+      <div className="relative aspect-[5/4] overflow-hidden bg-[color:var(--brand-ink)]">
         <Image
           src={sector.heroImage}
           alt={sector.name}
