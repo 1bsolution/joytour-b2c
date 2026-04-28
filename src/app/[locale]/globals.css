@@ -69,20 +69,29 @@
 }
 
 :root {
-  /* === Joytour corporate palette (verbatim from Elementor kit) === */
-  --brand-gold: #AF7A23;          /* deep gold — display headings, brand */
-  --brand-amber: #EFA62E;         /* warm amber — accents, hover lifts */
-  --brand-orange: #E97C00;        /* CTA orange — buttons */
-  --brand-orange-soft: #FFBC7D;   /* page transition / hover wash */
-  --brand-teal: #53C5BC;          /* secondary teal — pills, icons */
-  --brand-teal-soft: #2F7C82;     /* deeper teal — overlays */
-  --brand-yellow: #FDCA49;        /* highlight yellow */
-  --brand-cream: #FFF4E6;         /* warm section bg */
-  --brand-grey-soft: #F6F6F6;     /* neutral section bg */
+  /* === Joytour palette — sampled directly from the master logo ===
+     Two-colour identity: Hermès orange (#FA5A0A) + Tiffany blue (#50BEB4),
+     plus warm cream and ink neutrals. Token names are kept stable for
+     backwards compatibility — `--brand-gold` no longer renders gold; it's
+     the deep-ink heading colour used by h1–h4 defaults. */
+  --brand-orange: #FA5A0A;        /* primary CTA, accent words */
+  --brand-orange-deep: #D04A00;   /* hover/pressed CTA */
+  --brand-orange-soft: #FFD6B8;   /* pale orange wash */
+  --brand-amber: #FF7A33;         /* lighter orange for hover lifts */
+  --brand-teal: #50BEB4;          /* Tiffany blue — secondary accent */
+  --brand-teal-deep: #2D8E85;     /* deep tiffany */
+  --brand-teal-soft: #DBF1ED;     /* pale tiffany surface tint */
+  --brand-cream: #FFF4E6;         /* warm section background */
+  --brand-paper: #FAF9F6;         /* neutral paper surface */
+  --brand-grey-soft: #F6F6F6;     /* alt section bg */
   --brand-grey-cool: #F4F8FB;     /* cool section bg */
-  --brand-brown: #795822;         /* heading text on cream */
+  --brand-ink: #1A1A1A;           /* deepest ink — heading default */
   --brand-text: #2B2B2B;          /* body text */
   --brand-muted: #525252;         /* secondary body text */
+  /* Legacy aliases — kept so existing inline class strings still resolve */
+  --brand-gold: var(--brand-ink);    /* heading colour (was #AF7A23) */
+  --brand-brown: var(--brand-ink);   /* was #795822 */
+  --brand-yellow: var(--brand-amber);
 
   --font-mono-stack: "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
 
@@ -219,23 +228,24 @@
 }
 
 @layer components {
+  /* Section eyebrow — Tiffany blue for the brand-second pop. */
   .kicker {
     display: inline-flex;
     align-items: center;
     gap: 0.6em;
     font-family: var(--font-sans);
     font-size: 0.78rem;
-    font-weight: 500;
-    letter-spacing: 0.16em;
+    font-weight: 600;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: var(--brand-gold);
+    color: var(--brand-teal-deep);
   }
 
   .kicker::before {
     content: "";
     width: 1.6rem;
     height: 1px;
-    background: var(--brand-gold);
+    background: var(--brand-teal);
     flex-shrink: 0;
   }
 
@@ -258,7 +268,7 @@
   }
 
   .brand-pill:hover {
-    background: var(--brand-amber);
+    background: var(--brand-orange-deep);
   }
 
   .brand-pill-ghost {

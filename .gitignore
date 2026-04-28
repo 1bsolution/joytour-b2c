@@ -43,6 +43,7 @@ yarn-error.log*
 # logo source files (mirrored to public/)
 /Light-orange-joytour.png
 /joytour-logo-gold-1.webp
+/缤纷假期1.png
 
 # typescript
 *.tsbuildinfo
