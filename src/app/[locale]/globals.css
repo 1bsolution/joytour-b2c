@@ -309,3 +309,35 @@
   text-transform: none;
   letter-spacing: 0;
 }
+
+/* Print stylesheet for "Download PDF Itinerary" — strips chrome to a clean
+   itinerary card stack ready to save as PDF from the browser dialog. */
+@media print {
+  body > header,
+  body > footer,
+  body > div > header,
+  body > div > footer,
+  .tour-detail-print-hide {
+    display: none !important;
+  }
+
+  html,
+  body {
+    background: #FFFFFF !important;
+    color: #000000 !important;
+  }
+
+  a {
+    color: inherit !important;
+    text-decoration: none !important;
+  }
+
+  .tour-detail-print {
+    padding: 0 !important;
+  }
+
+  .tour-detail-print [id] {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+}

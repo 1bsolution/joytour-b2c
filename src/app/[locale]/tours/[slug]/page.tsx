@@ -11,6 +11,11 @@ import {
 } from "@/lib/tours";
 import { formatSgd } from "@/lib/format";
 import { TourCard } from "@/components/tour/tour-card";
+import {
+  DownloadItineraryButton,
+  TourDetailSections,
+} from "@/components/tour/tour-detail-sections";
+import { buildTourDetailContent } from "@/lib/tour-detail-content";
 
 export const dynamicParams = false;
 
@@ -31,6 +36,7 @@ export default async function TourDetailPage({
 
   const similar = await listSimilarTours(tour, 3);
   const parsed = parseDescription(tour.description);
+  const detailContent = buildTourDetailContent(tour);
 
   return (
     <>
@@ -136,6 +142,7 @@ export default async function TourDetailPage({
               >
                 WhatsApp +65 8629 9765
               </a>
+              <DownloadItineraryButton label="Download PDF Itinerary" />
               <p className="mt-5 text-[0.78rem] leading-[1.5] text-[color:var(--brand-muted)]">
                 Prices are indicative and subject to availability and seasonality. Our
                 team confirms exact dates and pricing within one business day.
@@ -144,6 +151,12 @@ export default async function TourDetailPage({
           </aside>
         </div>
       </section>
+
+      <TourDetailSections
+        slug={tour.slug}
+        durationDays={tour.durationDays}
+        content={detailContent}
+      />
 
       {similar.length > 0 && (
         <section className="bg-[color:var(--brand-cream)] px-5 py-24 md:px-8 md:py-28">
