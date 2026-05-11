@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import {
   Calendar,
   ChevronDown,
@@ -56,19 +56,44 @@ export function TourDetailSections({
   content,
 }: TourDetailSectionsProps) {
   const activeTab = useScrollSpy(TABS.map((t) => t.id));
+  const sectionRef = useRef<HTMLElement>(null);
+
+  // When the tab nav becomes pinned at the top of the viewport we hide the
+  // site header (mega-menu) by toggling `jt-tabs-pinned` on the document body.
+  // Detection uses an IntersectionObserver whose root is collapsed to the top
+  // edge of the viewport via rootMargin, so the section "intersects" exactly
+  // when scrollY has crossed its top but not yet its bottom.
+  useEffect(() => {
+    const section = sectionRef.current;
+    if (!section) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        document.body.classList.toggle("jt-tabs-pinned", entry.isIntersecting);
+      },
+      { rootMargin: "0px 0px -100% 0px", threshold: 0 },
+    );
+    observer.observe(section);
+    return () => {
+      observer.disconnect();
+      document.body.classList.remove("jt-tabs-pinned");
+    };
+  }, []);
 
   const scrollTo = useCallback((id: SectionId) => {
     const el = document.getElementById(id);
     if (!el) return;
-    const stickyOffset = 72 + 56 + 12;
+    const stickyOffset = 56 + 12;
     const y = el.getBoundingClientRect().top + window.scrollY - stickyOffset;
     window.scrollTo({ top: y, behavior: "smooth" });
   }, []);
 
   return (
-    <section className="bg-[color:var(--brand-paper)] tour-detail-print">
+    <section
+      ref={sectionRef}
+      className="bg-[color:var(--brand-paper)] tour-detail-print"
+    >
       <div
-        className="sticky top-[72px] z-30 border-y border-[color:var(--brand-border)] bg-white/95 backdrop-blur tour-detail-print-hide"
+        className="sticky top-0 z-[60] border-y border-[color:var(--brand-border)] bg-white/95 backdrop-blur tour-detail-print-hide"
         aria-label="Tour detail sections"
       >
         <div className="mx-auto flex max-w-6xl gap-1 overflow-x-auto px-5 md:px-8">

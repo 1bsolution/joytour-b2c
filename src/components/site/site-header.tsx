@@ -43,7 +43,7 @@ export function SiteHeader() {
     <>
       <header
         className={cn(
-          "fixed inset-x-0 top-0 z-50 transition-[background-color,border-color,backdrop-filter] duration-300 ease-out",
+          "fixed inset-x-0 top-0 z-50 transition-[background-color,border-color,backdrop-filter,transform] duration-300 ease-out",
           isOpaque
             ? "border-b border-[color:var(--brand-border)] bg-white/95 backdrop-blur-md"
             : "border-b border-transparent bg-transparent"
