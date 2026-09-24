@@ -457,7 +457,7 @@ export default async function TermsPage({
       <section className="bg-white px-5 py-16 md:px-8 md:py-20">
         <div className="mx-auto grid max-w-6xl gap-12 lg:grid-cols-[16rem_1fr] lg:gap-16">
           <aside className="lg:sticky lg:top-28 lg:self-start">
-            <p className="text-[0.72rem] font-semibold uppercase tracking-[0.22em] text-[color:var(--brand-teal-deep)]">
+            <p className="text-[0.78rem] font-semibold capitalize tracking-[0.04em] text-[color:var(--brand-teal-deep)]">
               Contents
             </p>
             <nav
@@ -482,7 +482,7 @@ export default async function TermsPage({
           <div className="space-y-16">
             {sections.map((s) => (
               <article key={s.id} id={s.id} className="scroll-mt-32">
-                <p className="text-[0.72rem] font-semibold uppercase tracking-[0.22em] text-[color:var(--brand-teal-deep)]">
+                <p className="text-[0.78rem] font-semibold capitalize tracking-[0.04em] text-[color:var(--brand-teal-deep)]">
                   Section {s.number}
                 </p>
                 <h2 className="mt-3">{s.title}</h2>
@@ -566,7 +566,7 @@ export default async function TermsPage({
 
       <section className="bg-[color:var(--brand-ink)] px-5 py-16 text-white md:px-8 md:py-20">
         <div className="mx-auto max-w-3xl text-center">
-          <p className="text-[0.72rem] font-semibold uppercase tracking-[0.22em] text-[color:var(--brand-teal)]">
+          <p className="text-[0.78rem] font-semibold capitalize tracking-[0.04em] text-[color:var(--brand-teal)]">
             Questions?
           </p>
           <h2 className="mt-3 text-white">

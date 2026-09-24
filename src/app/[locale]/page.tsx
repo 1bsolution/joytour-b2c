@@ -208,7 +208,7 @@ function Hero() {
         }}
       />
       <div className="relative mx-auto flex min-h-[640px] max-w-6xl flex-col items-center justify-center px-5 pb-32 pt-32 text-center md:min-h-[720px] md:px-8 md:pb-40 md:pt-36">
-        <p className="text-[0.78rem] font-medium uppercase tracking-[0.22em] text-white/85">
+        <p className="text-[0.85rem] font-medium capitalize tracking-[0.06em] text-white/85">
           {copy.heroKicker}
         </p>
         <h1 className="mt-6 max-w-4xl text-balance font-display text-[clamp(2.5rem,1.85rem+3.4vw,4.4rem)] font-extrabold leading-[1.04] tracking-[0.005em] text-white drop-shadow-[0_2px_18px_rgba(0,0,0,0.18)]">
@@ -251,7 +251,7 @@ function SearchPanel() {
             >
               <Icon className="size-4 text-[color:var(--brand-orange)]" aria-hidden />
               <span className="min-w-0 flex-1">
-                <span className="block text-[0.65rem] font-medium uppercase tracking-[0.16em] text-[color:var(--brand-muted)]">
+                <span className="block text-[0.72rem] font-medium capitalize tracking-[0.02em] text-[color:var(--brand-muted)]">
                   {field.label}
                 </span>
                 <span className="block truncate text-sm font-medium text-[color:var(--brand-text)]">
@@ -323,7 +323,7 @@ function AboutSection() {
                 <PhoneCall className="size-5" />
               </span>
               <div>
-                <p className="text-[0.7rem] font-medium uppercase tracking-[0.18em] text-[color:var(--brand-muted)]">
+                <p className="text-[0.78rem] font-medium capitalize tracking-[0.02em] text-[color:var(--brand-muted)]">
                   {copy.readyTitle}
                 </p>
                 <a
@@ -336,7 +336,7 @@ function AboutSection() {
                   href="https://wa.me/6586299765"
                   target="_blank"
                   rel="noreferrer"
-                  className="mt-3 inline-flex items-center text-[0.78rem] font-medium uppercase tracking-[0.16em] text-[color:var(--brand-text)] underline-offset-4 hover:text-[color:var(--brand-orange)] hover:underline"
+                  className="mt-3 inline-flex items-center text-[0.82rem] font-medium capitalize tracking-[0.02em] text-[color:var(--brand-text)] underline-offset-4 hover:text-[color:var(--brand-orange)] hover:underline"
                 >
                   {copy.reachOut}
                   <span aria-hidden className="ml-2">→</span>
@@ -425,7 +425,7 @@ function CountryCard({ href, label, body, image, alt, cta }: CountryCardProps) {
         <p className="max-w-sm text-[0.95rem] leading-[1.55] text-white/88">
           {body}
         </p>
-        <span className="inline-flex items-center pt-2 text-[0.78rem] font-medium uppercase tracking-[0.18em] text-[color:var(--brand-amber)] underline-offset-[6px] group-hover:underline">
+        <span className="inline-flex items-center pt-2 text-[0.82rem] font-medium capitalize tracking-[0.02em] text-[color:var(--brand-amber)] underline-offset-[6px] group-hover:underline">
           {cta}
           <span aria-hidden className="ml-2">→</span>
         </span>

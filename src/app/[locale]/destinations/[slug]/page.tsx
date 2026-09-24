@@ -47,7 +47,7 @@ async function CountryView({ country }: { country: Country }) {
         <div className="mx-auto max-w-6xl">
           <Link
             href="/destinations"
-            className="inline-flex items-center gap-2 text-[0.78rem] font-medium uppercase tracking-[0.18em] text-[color:var(--brand-muted)] transition hover:text-[color:var(--brand-orange)]"
+            className="inline-flex items-center gap-2 text-[0.82rem] font-medium capitalize tracking-[0.02em] text-[color:var(--brand-muted)] transition hover:text-[color:var(--brand-orange)]"
           >
             <ArrowLeft className="size-3.5" aria-hidden />
             {t("back")}
@@ -67,7 +67,7 @@ async function CountryView({ country }: { country: Country }) {
                 </span>
               </h2>
             </div>
-            <Link href="/tours" className="hidden text-[0.78rem] font-medium uppercase tracking-[0.18em] text-[color:var(--brand-orange)] underline-offset-4 hover:underline md:inline-flex">
+            <Link href="/tours" className="hidden text-[0.82rem] font-medium capitalize tracking-[0.02em] text-[color:var(--brand-orange)] underline-offset-4 hover:underline md:inline-flex">
               {t("browseAllRoutes")}
               <span aria-hidden className="ml-2">→</span>
             </Link>
@@ -134,7 +134,7 @@ async function SectorView({
         <div className="mx-auto flex max-w-6xl items-center gap-6">
           <Link
             href={`/destinations/${country.slug}`}
-            className="inline-flex items-center gap-2 text-[0.78rem] font-medium uppercase tracking-[0.18em] text-[color:var(--brand-muted)] transition hover:text-[color:var(--brand-orange)]"
+            className="inline-flex items-center gap-2 text-[0.82rem] font-medium capitalize tracking-[0.02em] text-[color:var(--brand-muted)] transition hover:text-[color:var(--brand-orange)]"
           >
             <ArrowLeft className="size-3.5" aria-hidden />
             All {country.name}
@@ -222,7 +222,7 @@ function Hero({
         }}
       />
       <div className="relative mx-auto flex min-h-[460px] max-w-6xl flex-col justify-end px-5 pb-16 pt-36 md:min-h-[520px] md:px-8 md:pb-20 md:pt-40">
-        <p className="text-[0.72rem] font-semibold uppercase tracking-[0.22em] text-[color:var(--brand-amber)]">
+        <p className="text-[0.78rem] font-semibold capitalize tracking-[0.04em] text-[color:var(--brand-amber)]">
           {eyebrow}
         </p>
         <h1 className="mt-3 max-w-3xl font-display text-[clamp(2.25rem,1.7rem+2.6vw,3.75rem)] font-extrabold leading-[1.04] tracking-[0.005em] text-white">
@@ -258,7 +258,7 @@ function SectorTile({ sector, viewLabel }: { sector: Sector; viewLabel: string }
         <p className="line-clamp-3 text-[0.95rem] leading-[1.6] text-[color:var(--brand-muted)]">
           {sector.description}
         </p>
-        <span className="mt-auto inline-flex items-center gap-2 pt-3 text-[0.78rem] font-medium uppercase tracking-[0.18em] text-[color:var(--brand-orange)] underline-offset-4 group-hover:underline">
+        <span className="mt-auto inline-flex items-center gap-2 pt-3 text-[0.82rem] font-medium capitalize tracking-[0.02em] text-[color:var(--brand-orange)] underline-offset-4 group-hover:underline">
           {viewLabel}
           <ArrowRight className="size-3.5" aria-hidden />
         </span>

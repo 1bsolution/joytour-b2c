@@ -36,7 +36,7 @@ export async function TourCard({ tour }: TourCardProps) {
       </div>
 
       <div className="flex flex-1 flex-col gap-3 p-6">
-        <p className="text-[0.7rem] font-semibold uppercase tracking-[0.2em] text-[color:var(--brand-gold)]">
+        <p className="text-[0.75rem] font-semibold capitalize tracking-[0.04em] text-[color:var(--brand-gold)]">
           {t("days", { count: tour.durationDays })}
         </p>
         <h3 className="line-clamp-2 font-display text-[1.25rem] font-bold leading-[1.18] tracking-[0.005em] text-[color:var(--brand-gold)]">
@@ -51,7 +51,7 @@ export async function TourCard({ tour }: TourCardProps) {
             {tour.destinations.slice(0, 3).map((d) => (
               <span
                 key={d.slug}
-                className="inline-flex items-center rounded-full bg-[color:var(--brand-teal-soft)] px-3 py-1 text-[0.7rem] font-semibold uppercase tracking-[0.14em] text-[color:var(--brand-teal-deep)]"
+                className="inline-flex items-center rounded-full bg-[color:var(--brand-teal-soft)] px-3 py-1 text-[0.72rem] font-semibold capitalize tracking-[0.02em] text-[color:var(--brand-teal-deep)]"
               >
                 {d.name}
               </span>
@@ -67,7 +67,7 @@ export async function TourCard({ tour }: TourCardProps) {
           }
         >
           <div>
-            <p className="text-[0.7rem] font-medium uppercase tracking-[0.18em] text-[color:var(--brand-muted)]">
+            <p className="text-[0.75rem] font-medium capitalize tracking-[0.02em] text-[color:var(--brand-muted)]">
               {t("from")}
             </p>
             <p className="font-display text-[1.25rem] font-bold tabular-nums text-[color:var(--brand-orange)]">
@@ -77,7 +77,7 @@ export async function TourCard({ tour }: TourCardProps) {
               {t("perPerson")}
             </p>
           </div>
-          <span className="inline-flex items-center gap-1.5 self-end pb-1 text-[0.78rem] font-medium uppercase tracking-[0.18em] text-[color:var(--brand-orange)] underline-offset-4 group-hover:underline">
+          <span className="inline-flex items-center gap-1.5 self-end pb-1 text-[0.82rem] font-medium capitalize tracking-[0.02em] text-[color:var(--brand-orange)] underline-offset-4 group-hover:underline">
             {t("viewDetails")}
             <ArrowRight className="size-3.5" aria-hidden />
           </span>

@@ -38,7 +38,7 @@ export async function SiteFooter() {
         </FooterColumn>
 
         <div className="space-y-5">
-          <h3 className="text-[0.72rem] font-medium uppercase tracking-[0.22em] text-[color:var(--brand-amber)]">
+          <h3 className="text-[0.82rem] font-medium capitalize tracking-[0.04em] text-[color:var(--brand-amber)]">
             {t("getInTouch")}
           </h3>
           <p className="flex gap-3 text-[0.95rem] leading-[1.55] text-white/82">
@@ -60,7 +60,7 @@ export async function SiteFooter() {
             hello@joytour.sg
           </a>
           <div className="pt-3">
-            <p className="mb-3 text-[0.72rem] font-medium uppercase tracking-[0.22em] text-[color:var(--brand-amber)]">
+            <p className="mb-3 text-[0.82rem] font-medium capitalize tracking-[0.04em] text-[color:var(--brand-amber)]">
               {t("social")}
             </p>
             <div className="flex gap-2">
@@ -104,7 +104,7 @@ function FooterColumn({
 }) {
   return (
     <nav className="space-y-3 text-[0.95rem]">
-      <h3 className="mb-4 text-[0.72rem] font-medium uppercase tracking-[0.22em] text-[color:var(--brand-amber)]">
+      <h3 className="mb-4 text-[0.82rem] font-medium capitalize tracking-[0.04em] text-[color:var(--brand-amber)]">
         {title}
       </h3>
       {children}

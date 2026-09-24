@@ -51,7 +51,7 @@ function Hero() {
         }}
       />
       <div className="relative mx-auto flex min-h-[480px] max-w-6xl flex-col justify-end px-5 pb-20 pt-36 md:min-h-[560px] md:px-8 md:pb-24 md:pt-44">
-        <p className="text-[0.78rem] font-semibold uppercase tracking-[0.22em] text-[color:var(--brand-teal)]">
+        <p className="text-[0.85rem] font-semibold capitalize tracking-[0.06em] text-[color:var(--brand-teal)]">
           About us · Joytour Holidays
         </p>
         <h1 className="mt-4 max-w-4xl font-display text-[clamp(2.5rem,1.85rem+3.4vw,4.4rem)] font-extrabold leading-[1.04] tracking-[0.005em] text-white">
@@ -205,8 +205,8 @@ function DestinationFocus() {
               <p
                 className={
                   f.tone === "teal"
-                    ? "text-[0.72rem] font-semibold uppercase tracking-[0.22em] text-[color:var(--brand-teal-deep)]"
-                    : "text-[0.72rem] font-semibold uppercase tracking-[0.22em] text-[color:var(--brand-orange)]"
+                    ? "text-[0.78rem] font-semibold capitalize tracking-[0.04em] text-[color:var(--brand-teal-deep)]"
+                    : "text-[0.78rem] font-semibold capitalize tracking-[0.04em] text-[color:var(--brand-orange)]"
                 }
               >
                 {f.tag}
@@ -297,7 +297,7 @@ function ClosingCTA() {
   return (
     <section className="bg-white px-5 pb-28 pt-24 md:px-8 md:pb-36 md:pt-32">
       <div className="mx-auto max-w-4xl rounded-[32px] bg-[color:var(--brand-ink)] px-7 py-14 text-center text-white md:px-12 md:py-20">
-        <p className="text-[0.72rem] font-semibold uppercase tracking-[0.22em] text-[color:var(--brand-teal)]">
+        <p className="text-[0.78rem] font-semibold capitalize tracking-[0.04em] text-[color:var(--brand-teal)]">
           Plan your trip
         </p>
         <h2 className="mx-auto mt-4 max-w-2xl text-white">

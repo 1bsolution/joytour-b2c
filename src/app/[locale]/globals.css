@@ -4,6 +4,15 @@
 
 @custom-variant dark (&:is(.dark *));
 
+@font-face {
+  font-family: "Britannic Bold";
+  src: local("Britannic Bold"), local("BritannicBold"),
+       url("/fonts/britannic-bold.ttf") format("truetype");
+  font-weight: 400 900;
+  font-style: normal;
+  font-display: swap;
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -26,8 +35,9 @@
   --font-sans: var(--font-body), -apple-system, BlinkMacSystemFont,
     "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", system-ui, sans-serif;
   --font-mono: var(--font-mono-stack);
-  --font-display: var(--font-display), "Songti SC", "STSong",
-    Georgia, "Times New Roman", serif;
+  --font-display: var(--font-display), "Britannic Bold", "Britannic",
+    -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB",
+    "Microsoft YaHei", sans-serif;
   --font-heading: var(--font-display);
 
   --color-sidebar-ring: var(--sidebar-ring);
@@ -236,10 +246,10 @@
     align-items: center;
     gap: 0.6em;
     font-family: var(--font-sans);
-    font-size: 0.78rem;
+    font-size: 0.82rem;
     font-weight: 600;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    text-transform: capitalize;
     color: var(--brand-teal-deep);
   }
 
@@ -313,7 +323,7 @@ body.jt-tabs-pinned > header {
 [lang="zh"] h2,
 [lang="zh"] h3,
 [lang="zh"] h4 {
-  /* CJK doesn't render Cinzel — use a clean serif fallback at appropriate weight */
+  /* CJK doesn't render Britannic Bold — clean sans-serif fallback */
   text-transform: none;
   letter-spacing: 0;
 }

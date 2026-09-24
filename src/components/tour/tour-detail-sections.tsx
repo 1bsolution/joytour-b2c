@@ -104,7 +104,7 @@ export function TourDetailSections({
                 key={tab.id}
                 type="button"
                 onClick={() => scrollTo(tab.id)}
-                className={`relative shrink-0 px-5 py-4 text-[0.78rem] font-semibold uppercase tracking-[0.18em] transition ${
+                className={`relative shrink-0 px-5 py-4 text-[0.85rem] font-semibold capitalize tracking-[0.01em] transition ${
                   isActive
                     ? "text-[color:var(--brand-orange)]"
                     : "text-[color:var(--brand-muted)] hover:text-[color:var(--brand-text)]"
@@ -163,7 +163,7 @@ function ItinerarySection({ days }: { days: ReadonlyArray<ItineraryDay> }) {
             return (
               <span
                 key={meal}
-                className="inline-flex items-center gap-1.5 rounded-full bg-white px-3 py-1.5 text-[0.7rem] font-semibold uppercase tracking-[0.16em] text-[color:var(--brand-muted)] ring-1 ring-[color:var(--brand-border)]"
+                className="inline-flex items-center gap-1.5 rounded-full bg-white px-3 py-1.5 text-[0.75rem] font-semibold capitalize tracking-[0.02em] text-[color:var(--brand-muted)] ring-1 ring-[color:var(--brand-border)]"
               >
                 <Icon className="size-3.5" aria-hidden /> {label}
               </span>
@@ -207,7 +207,7 @@ function ItineraryDayCard({
       </div>
 
       <article className="rounded-[24px] bg-white p-6 ring-1 ring-[color:var(--brand-border)] shadow-[0_18px_38px_-26px_rgba(43,43,43,0.18)] md:p-7">
-        <p className="text-[0.7rem] font-semibold uppercase tracking-[0.22em] text-[color:var(--brand-teal-deep)]">
+        <p className="text-[0.78rem] font-semibold capitalize tracking-[0.04em] text-[color:var(--brand-teal-deep)]">
           Day {day.day}
         </p>
         <h3 className="mt-2 font-display text-[1.25rem] font-bold leading-[1.2] tracking-[0.005em] text-[color:var(--brand-ink)] md:text-[1.4rem]">
@@ -224,7 +224,7 @@ function ItineraryDayCard({
               return (
                 <span
                   key={meal}
-                  className="inline-flex items-center gap-1.5 rounded-full bg-[color:var(--brand-teal-soft)] px-3 py-1 text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-[color:var(--brand-teal-deep)]"
+                  className="inline-flex items-center gap-1.5 rounded-full bg-[color:var(--brand-teal-soft)] px-3 py-1 text-[0.75rem] font-semibold capitalize tracking-[0.02em] text-[color:var(--brand-teal-deep)]"
                 >
                   <Icon className="size-3.5" aria-hidden /> {label}
                 </span>
@@ -265,7 +265,7 @@ function DeparturesSection({
         </div>
         <Link
           href="/contact"
-          className="inline-flex items-center gap-2 text-[0.78rem] font-medium uppercase tracking-[0.18em] text-[color:var(--brand-orange)] underline-offset-4 hover:underline"
+          className="inline-flex items-center gap-2 text-[0.82rem] font-medium capitalize tracking-[0.02em] text-[color:var(--brand-orange)] underline-offset-4 hover:underline"
         >
           Need another date? Enquire
           <Send className="size-3.5" aria-hidden />
@@ -342,13 +342,13 @@ function DepartureRow({
           <p className="font-display text-[1rem] font-bold leading-[1.2] tracking-[0.005em] text-[color:var(--brand-ink)]">
             {formatDepartureRange(dep.date, durationDays)}
           </p>
-          <p className="mt-1 text-[0.78rem] font-medium uppercase tracking-[0.16em] text-[color:var(--brand-muted)]">
+          <p className="mt-1 text-[0.78rem] font-medium capitalize tracking-[0.02em] text-[color:var(--brand-muted)]">
             Tour code · {dep.tourCode}
           </p>
         </div>
         <StatusPill status={dep.status} />
         <div className="text-right">
-          <p className="text-[0.68rem] font-medium uppercase tracking-[0.18em] text-[color:var(--brand-muted)]">
+          <p className="text-[0.75rem] font-medium capitalize tracking-[0.02em] text-[color:var(--brand-muted)]">
             From
           </p>
           <p className="font-display text-[1.25rem] font-bold tabular-nums text-[color:var(--brand-orange)]">
@@ -375,7 +375,7 @@ function DepartureRow({
               confirmed on enquiry.
             </p>
             {isSoldOut ? (
-              <span className="inline-flex h-11 items-center justify-center rounded-full bg-[color:var(--brand-grey-soft)] px-6 text-[0.85rem] font-semibold uppercase tracking-[0.16em] text-[color:var(--brand-muted)]">
+              <span className="inline-flex h-11 items-center justify-center rounded-full bg-[color:var(--brand-grey-soft)] px-6 text-[0.85rem] font-semibold capitalize tracking-[0.02em] text-[color:var(--brand-muted)]">
                 Waitlist closed
               </span>
             ) : (
@@ -403,7 +403,7 @@ function StatusPill({ status }: { status: DepartureStatus }) {
   };
   return (
     <span
-      className={`inline-flex items-center rounded-full px-3 py-1 text-[0.7rem] font-semibold uppercase tracking-[0.16em] ${styles[status]}`}
+      className={`inline-flex items-center rounded-full px-3 py-1 text-[0.75rem] font-semibold capitalize tracking-[0.02em] ${styles[status]}`}
     >
       {statusLabel(status)}
     </span>
@@ -419,7 +419,7 @@ function FareColumn({
 }) {
   return (
     <div>
-      <p className="text-[0.72rem] font-semibold uppercase tracking-[0.2em] text-[color:var(--brand-teal-deep)]">
+      <p className="text-[0.78rem] font-semibold capitalize tracking-[0.04em] text-[color:var(--brand-teal-deep)]">
         {title}
       </p>
       <ul className="mt-4 space-y-3">
@@ -531,7 +531,7 @@ function Card({
   return (
     <div className="rounded-[24px] bg-white p-7 ring-1 ring-[color:var(--brand-border)] md:p-8">
       <p
-        className={`text-[0.72rem] font-semibold uppercase tracking-[0.2em] ${accentClass}`}
+        className={`text-[0.78rem] font-semibold capitalize tracking-[0.04em] ${accentClass}`}
       >
         {title}
       </p>

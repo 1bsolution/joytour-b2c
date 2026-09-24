@@ -54,7 +54,7 @@ export default async function DestinationsPage({
                     <h2 className="font-display text-[2.25rem] font-bold leading-none tracking-[0.005em] text-white md:text-[3rem]">
                       {country.name}
                     </h2>
-                    <span className="rounded-full bg-white/15 px-4 py-1.5 text-[0.7rem] font-semibold uppercase tracking-[0.2em] text-white/95 backdrop-blur">
+                    <span className="rounded-full bg-white/15 px-4 py-1.5 text-[0.75rem] font-semibold capitalize tracking-[0.02em] text-white/95 backdrop-blur">
                       {country.routeCountLabel}
                     </span>
                   </div>
@@ -66,7 +66,7 @@ export default async function DestinationsPage({
                   </p>
 
                   <div className="mt-8">
-                    <p className="text-[0.72rem] font-medium uppercase tracking-[0.22em] text-[color:var(--brand-gold)]">
+                    <p className="text-[0.78rem] font-medium capitalize tracking-[0.04em] text-[color:var(--brand-gold)]">
                       {t("regionsLabel")}
                     </p>
                     <ul className="mt-4 flex flex-wrap gap-2">

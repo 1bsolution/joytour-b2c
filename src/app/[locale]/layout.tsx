@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { Cinzel, Inter } from "next/font/google";
+import localFont from "next/font/local";
+import { Inter } from "next/font/google";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
@@ -9,9 +10,29 @@ import { SiteFooter } from "@/components/site/site-footer";
 import { Toaster } from "@/components/ui/sonner";
 import "./globals.css";
 
-const display = Cinzel({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800", "900"],
+const display = localFont({
+  src: [
+    {
+      path: "../../fonts/britannic-bold.ttf",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "../../fonts/britannic-bold.ttf",
+      weight: "700",
+      style: "normal",
+    },
+    {
+      path: "../../fonts/britannic-bold.ttf",
+      weight: "800",
+      style: "normal",
+    },
+    {
+      path: "../../fonts/britannic-bold.ttf",
+      weight: "900",
+      style: "normal",
+    },
+  ],
   variable: "--font-display",
   display: "swap",
 });

@@ -60,7 +60,7 @@ export default async function ToursPage({
               <span className="font-medium capitalize">{filterLabel}</span>
               <Link
                 href="/tours"
-                className="rounded-full bg-[color:var(--brand-orange)] px-3 py-1 text-[0.7rem] font-medium uppercase tracking-[0.16em] text-white transition hover:bg-[color:var(--brand-amber)]"
+                className="rounded-full bg-[color:var(--brand-orange)] px-3 py-1 text-[0.78rem] font-medium capitalize tracking-[0.02em] text-white transition hover:bg-[color:var(--brand-amber)]"
               >
                 Clear
               </Link>

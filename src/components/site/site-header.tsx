@@ -61,7 +61,7 @@ export function SiteHeader() {
           />
         </Link>
 
-        <nav className="ml-auto hidden items-center gap-8 text-[0.82rem] font-medium uppercase tracking-[0.16em] md:flex">
+        <nav className="ml-auto hidden items-center gap-8 text-[0.92rem] font-medium capitalize tracking-[0.01em] md:flex">
           <DestinationsMenu
             label={t("destinations")}
             viewAllLabel={t("viewAllDestinations")}
@@ -82,7 +82,7 @@ export function SiteHeader() {
           <Link
             href="/tours"
             className={cn(
-              "hidden h-10 items-center rounded-full px-5 text-[0.78rem] font-semibold uppercase tracking-[0.16em] transition-[background-color,color,border-color] duration-300 ease-out lg:inline-flex",
+              "hidden h-10 items-center rounded-full px-5 text-[0.85rem] font-semibold capitalize tracking-[0.01em] transition-[background-color,color,border-color] duration-300 ease-out lg:inline-flex",
               isOpaque
                 ? "bg-[color:var(--brand-text)] text-white hover:bg-[color:var(--brand-orange)]"
                 : "bg-[color:var(--brand-amber)] text-[color:var(--brand-text)] hover:bg-white"
@@ -198,7 +198,7 @@ function DestinationsMenu({
               <div key={country.slug} className="min-w-[10rem]">
                 <Link
                   href={`/destinations/${country.slug}`}
-                  className="mb-4 block font-display text-[1.05rem] font-bold uppercase tracking-[0.04em] text-[color:var(--brand-gold)] transition hover:text-[color:var(--brand-orange)]"
+                  className="mb-4 block font-display text-[1.15rem] font-bold capitalize tracking-[0.01em] text-[color:var(--brand-gold)] transition hover:text-[color:var(--brand-orange)]"
                 >
                   {country.name}
                 </Link>
@@ -220,7 +220,7 @@ function DestinationsMenu({
           <div className="mt-7 flex items-center justify-between border-t border-[color:var(--brand-divider)] pt-5">
             <Link
               href="/destinations"
-              className="inline-flex items-center text-[0.78rem] font-semibold uppercase tracking-[0.16em] text-[color:var(--brand-orange)] transition hover:text-[color:var(--brand-amber)]"
+              className="inline-flex items-center text-[0.82rem] font-semibold capitalize tracking-[0.01em] text-[color:var(--brand-orange)] transition hover:text-[color:var(--brand-amber)]"
             >
               {viewAllLabel}
               <span aria-hidden className="ml-2">→</span>

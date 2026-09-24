@@ -52,7 +52,7 @@ export default async function TourDetailPage({
         <div className="mx-auto max-w-6xl">
           <Link
             href="/tours"
-            className="inline-flex items-center gap-2 text-[0.78rem] font-medium uppercase tracking-[0.18em] text-[color:var(--brand-muted)] transition hover:text-[color:var(--brand-orange)]"
+            className="inline-flex items-center gap-2 text-[0.82rem] font-medium capitalize tracking-[0.02em] text-[color:var(--brand-muted)] transition hover:text-[color:var(--brand-orange)]"
           >
             <ArrowLeft className="size-3.5" aria-hidden />
             All tours
@@ -109,7 +109,7 @@ export default async function TourDetailPage({
 
           <aside className="lg:sticky lg:top-28 lg:self-start">
             <div className="rounded-[28px] border border-[color:var(--brand-border)] bg-white p-7 shadow-[0_18px_40px_-22px_rgba(43,43,43,0.18)] md:p-8">
-              <p className="text-[0.7rem] font-medium uppercase tracking-[0.22em] text-[color:var(--brand-muted)]">
+              <p className="text-[0.78rem] font-medium capitalize tracking-[0.02em] text-[color:var(--brand-muted)]">
                 From
               </p>
               <p className="mt-1 font-display text-[2rem] font-bold leading-none text-[color:var(--brand-orange)] tabular-nums">
@@ -173,7 +173,7 @@ export default async function TourDetailPage({
               </div>
               <Link
                 href="/tours"
-                className="inline-flex items-center text-[0.78rem] font-medium uppercase tracking-[0.18em] text-[color:var(--brand-orange)] underline-offset-4 hover:underline"
+                className="inline-flex items-center text-[0.82rem] font-medium capitalize tracking-[0.02em] text-[color:var(--brand-orange)] underline-offset-4 hover:underline"
               >
                 Browse all routes
                 <ArrowRight className="ml-2 size-3.5" aria-hidden />
@@ -224,7 +224,7 @@ function Hero({
         }}
       />
       <div className="relative mx-auto flex min-h-[520px] max-w-6xl flex-col justify-end px-5 pb-16 pt-36 md:min-h-[600px] md:px-8 md:pb-20 md:pt-44">
-        <div className="flex flex-wrap items-center gap-2 text-[0.7rem] font-semibold uppercase tracking-[0.22em] text-[color:var(--brand-amber)]">
+        <div className="flex flex-wrap items-center gap-2 text-[0.78rem] font-semibold capitalize tracking-[0.04em] text-[color:var(--brand-amber)]">
           <span>{country}</span>
           <span aria-hidden className="text-white/45">·</span>
           <span>{durationLabel}</span>
@@ -253,7 +253,7 @@ function Fact({
     <li className="flex items-start gap-3">
       <Icon className="mt-0.5 size-4 shrink-0 text-[color:var(--brand-orange)]" aria-hidden />
       <span className="flex flex-1 flex-col">
-        <span className="text-[0.7rem] font-medium uppercase tracking-[0.18em] text-[color:var(--brand-muted)]">
+        <span className="text-[0.75rem] font-medium capitalize tracking-[0.02em] text-[color:var(--brand-muted)]">
           {label}
         </span>
         <span className="text-[color:var(--brand-text)]">{value}</span>
