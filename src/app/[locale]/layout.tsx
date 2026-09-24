@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import localFont from "next/font/local";
 import { Inter } from "next/font/google";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { setRequestLocale } from "next-intl/server";
@@ -9,33 +8,6 @@ import { SiteHeader } from "@/components/site/site-header";
 import { SiteFooter } from "@/components/site/site-footer";
 import { Toaster } from "@/components/ui/sonner";
 import "./globals.css";
-
-const display = localFont({
-  src: [
-    {
-      path: "../../fonts/britannic-bold.ttf",
-      weight: "400",
-      style: "normal",
-    },
-    {
-      path: "../../fonts/britannic-bold.ttf",
-      weight: "700",
-      style: "normal",
-    },
-    {
-      path: "../../fonts/britannic-bold.ttf",
-      weight: "800",
-      style: "normal",
-    },
-    {
-      path: "../../fonts/britannic-bold.ttf",
-      weight: "900",
-      style: "normal",
-    },
-  ],
-  variable: "--font-display",
-  display: "swap",
-});
 
 const body = Inter({
   subsets: ["latin"],
@@ -72,9 +44,18 @@ export default async function LocaleLayout({
   return (
     <html
       lang={locale}
-      className={`${display.variable} ${body.variable} h-full antialiased`}
+      className={`${body.variable} h-full antialiased`}
       data-locale={locale}
     >
+      <head>
+        <link
+          rel="preload"
+          href="/fonts/britannic-bold.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
+      </head>
       <body className="min-h-full flex flex-col bg-background text-foreground">
         <NextIntlClientProvider>
           <SiteHeader />
