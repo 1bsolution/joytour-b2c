@@ -50,7 +50,7 @@ export default async function LocaleLayout({
       <head>
         <link
           rel="preload"
-          href="/fonts/britannic-bold.woff2"
+          href="/fonts/mona-semibold.woff2"
           as="font"
           type="font/woff2"
           crossOrigin="anonymous"
