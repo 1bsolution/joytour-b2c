@@ -33,6 +33,11 @@ export async function TourCard({ tour }: TourCardProps) {
             className="absolute inset-0 bg-[linear-gradient(135deg,color-mix(in_srgb,var(--brand-orange)_18%,transparent),color-mix(in_srgb,var(--brand-teal)_18%,transparent))]"
           />
         )}
+        {tour.isSample && (
+          <span className="absolute left-4 top-4 rounded-full bg-white/90 px-2.5 py-1 text-[0.66rem] font-bold uppercase tracking-[0.08em] text-[color:var(--brand-orange)]">
+            Sample
+          </span>
+        )}
       </div>
 
       <div className="flex flex-1 flex-col gap-3 p-6">

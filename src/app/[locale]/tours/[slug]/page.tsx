@@ -8,7 +8,10 @@ import {
   listSimilarTours,
   allTourSlugs,
   parseDescription,
+  TOUR_TAGS,
+  type TourDetail,
 } from "@/lib/tours";
+import { productEnquiryMessage, whatsappHref } from "@/lib/whatsapp";
 import { formatSgd } from "@/lib/format";
 import { TourCard } from "@/components/tour/tour-card";
 import {
@@ -37,6 +40,12 @@ export default async function TourDetailPage({
   const similar = await listSimilarTours(tour, 3);
   const parsed = parseDescription(tour.description);
   const detailContent = buildTourDetailContent(tour);
+  // Flight promotions are info-only: no generated itinerary, enquire on WhatsApp.
+  const isFlightPromo = tour.tags.includes(TOUR_TAGS.flightPromo);
+  const back = backLink(tour);
+  const whatsappEnquiry = whatsappHref(
+    productEnquiryMessage({ name: tour.title, code: tour.slug, path: `/tours/${tour.slug}` })
+  );
 
   return (
     <>
@@ -51,11 +60,11 @@ export default async function TourDetailPage({
       <nav className="bg-white px-5 pt-10 md:px-8 md:pt-14">
         <div className="mx-auto max-w-6xl">
           <Link
-            href="/tours"
+            href={back.href}
             className="inline-flex items-center gap-2 text-[0.82rem] font-medium capitalize tracking-[0.02em] text-[color:var(--brand-muted)] transition hover:text-[color:var(--brand-orange)]"
           >
             <ArrowLeft className="size-3.5" aria-hidden />
-            All tours
+            {back.label}
           </Link>
         </div>
       </nav>
@@ -130,19 +139,33 @@ export default async function TourDetailPage({
                 <Fact icon={CalendarDays} label="Departures" value="Custom dates available" />
               </ul>
 
-              <Link href="/contact" className="brand-pill mt-7 w-full gap-2">
-                Send Enquiry
-                <Send className="size-4" aria-hidden />
-              </Link>
-              <a
-                href="https://wa.me/6586299765"
-                target="_blank"
-                rel="noreferrer"
-                className="mt-3 inline-flex h-11 w-full items-center justify-center gap-2 rounded-full border border-[color:var(--brand-border)] text-[0.9rem] font-medium text-[color:var(--brand-text)] transition hover:border-[color:var(--brand-orange)] hover:text-[color:var(--brand-orange)]"
-              >
-                WhatsApp +65 8629 9765
-              </a>
-              <DownloadItineraryButton label="Download PDF Itinerary" />
+              {isFlightPromo ? (
+                <a
+                  href={whatsappEnquiry}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="brand-pill mt-7 w-full gap-2"
+                >
+                  Enquire on WhatsApp
+                  <Send className="size-4" aria-hidden />
+                </a>
+              ) : (
+                <>
+                  <Link href="/contact" className="brand-pill mt-7 w-full gap-2">
+                    Send Enquiry
+                    <Send className="size-4" aria-hidden />
+                  </Link>
+                  <a
+                    href={whatsappEnquiry}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-3 inline-flex h-11 w-full items-center justify-center gap-2 rounded-full border border-[color:var(--brand-border)] text-[0.9rem] font-medium text-[color:var(--brand-text)] transition hover:border-[color:var(--brand-orange)] hover:text-[color:var(--brand-orange)]"
+                  >
+                    WhatsApp +65 8629 9765
+                  </a>
+                </>
+              )}
+              {!isFlightPromo && <DownloadItineraryButton label="Download PDF Itinerary" />}
               <p className="mt-5 text-[0.78rem] leading-[1.5] text-[color:var(--brand-muted)]">
                 Prices are indicative and subject to availability and seasonality. Our
                 team confirms exact dates and pricing within one business day.
@@ -152,11 +175,13 @@ export default async function TourDetailPage({
         </div>
       </section>
 
-      <TourDetailSections
-        slug={tour.slug}
-        durationDays={tour.durationDays}
-        content={detailContent}
-      />
+      {!isFlightPromo && (
+        <TourDetailSections
+          slug={tour.slug}
+          durationDays={tour.durationDays}
+          content={detailContent}
+        />
+      )}
 
       {similar.length > 0 && (
         <section className="bg-[color:var(--brand-cream)] px-5 py-24 md:px-8 md:py-28">
@@ -165,14 +190,22 @@ export default async function TourDetailPage({
               <div>
                 <p className="kicker">You may also like</p>
                 <h2 className="mt-4 max-w-2xl">
-                  Other routes through{" "}
-                  <span className="text-[color:var(--brand-orange)]">
-                    {tour.country === "china" ? "China" : "Japan"}
-                  </span>
+                  {isFlightPromo ? (
+                    <>
+                      More <span className="text-[color:var(--brand-orange)]">flight promotions</span>
+                    </>
+                  ) : (
+                    <>
+                      Other routes through{" "}
+                      <span className="text-[color:var(--brand-orange)]">
+                        {tour.country === "china" ? "China" : "Japan"}
+                      </span>
+                    </>
+                  )}
                 </h2>
               </div>
               <Link
-                href="/tours"
+                href={back.href}
                 className="inline-flex items-center text-[0.82rem] font-medium capitalize tracking-[0.02em] text-[color:var(--brand-orange)] underline-offset-4 hover:underline"
               >
                 Browse all routes
@@ -260,4 +293,13 @@ function Fact({
       </span>
     </li>
   );
+}
+
+function backLink(tour: TourDetail): { href: string; label: string } {
+  if (tour.tags.includes(TOUR_TAGS.flightPromo)) {
+    return { href: "/flight-promotions", label: "Flight promotions" };
+  }
+  if (tour.tags.includes(TOUR_TAGS.getaways)) return { href: "/getaways", label: "Getaways" };
+  if (tour.productType === "land") return { href: "/land-packages", label: "Land packages" };
+  return { href: "/tours", label: "All tours" };
 }

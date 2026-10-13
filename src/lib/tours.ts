@@ -5,6 +5,8 @@
 // flag, durationDays/Nights) used for routing, filtering, and the price
 // placeholder.
 
+import { SAMPLE_TOURS } from "./sample-tours";
+
 export interface TourSummary {
   id: string;
   slug: string;
@@ -21,6 +23,7 @@ export interface TourSummary {
   featured: boolean;
   productType: ProductType;
   tags: string[];
+  isSample: boolean;
 }
 
 export interface TourDetail extends TourSummary {
@@ -66,7 +69,7 @@ const SECTOR_NAMES: Record<string, string> = {
   osaka: "Osaka",
 };
 
-interface RawTour {
+export interface RawTour {
   slug: string;
   title: string;
   short: string;
@@ -79,6 +82,8 @@ interface RawTour {
   featured?: boolean;
   productType?: ProductType;
   tags?: string[];
+  priceSgd?: number;
+  sample?: boolean;
 }
 
 const RAW_TOURS: RawTour[] = [
@@ -460,7 +465,7 @@ function pricePlaceholderSgd(days: number): number {
 }
 
 function buildTour(raw: RawTour): TourDetail {
-  const price = pricePlaceholderSgd(raw.days);
+  const price = raw.priceSgd ?? pricePlaceholderSgd(raw.days);
   const sectorPills = raw.sectors.map((slug) => ({
     name: SECTOR_NAMES[slug] ?? slug,
     slug,
@@ -488,10 +493,11 @@ function buildTour(raw: RawTour): TourDetail {
     featured: raw.featured ?? false,
     productType: raw.productType ?? "group",
     tags: raw.tags ?? [],
+    isSample: raw.sample ?? false,
   };
 }
 
-const TOURS: TourDetail[] = RAW_TOURS.map(buildTour);
+const TOURS: TourDetail[] = [...RAW_TOURS, ...SAMPLE_TOURS].map(buildTour);
 
 export async function listFeaturedTours(limit = 6): Promise<TourSummary[]> {
   return TOURS.filter((t) => t.featured).slice(0, limit);
@@ -530,17 +536,27 @@ export async function listSimilarTours(
   current: TourDetail,
   limit = 3
 ): Promise<TourSummary[]> {
-  const sectorMatches = TOURS.filter(
+  // Keep suggestions in the same section: flight promos only suggest flight
+  // promos, land packages only land packages, group tours only group tours.
+  const isPromo = (t: TourSummary) => t.tags.includes(TOUR_TAGS.flightPromo);
+  const candidates = TOURS.filter(
+    (t) => t.productType === current.productType && isPromo(t) === isPromo(current)
+  );
+  const sectorMatches = candidates.filter(
     (t) =>
       t.slug !== current.slug &&
       t.destinations.some((d) => current.destinations.some((cd) => cd.slug === d.slug))
   );
-  const countryMatches = TOURS.filter(
+  const countryMatches = candidates.filter(
     (t) => t.slug !== current.slug && t.country === current.country
   );
   const seen = new Set<string>();
   const ordered: TourSummary[] = [];
-  for (const t of [...sectorMatches, ...countryMatches]) {
+  // Promos are few, so fall back to any other promo regardless of country.
+  const fallback = isPromo(current)
+    ? candidates.filter((t) => t.slug !== current.slug)
+    : [];
+  for (const t of [...sectorMatches, ...countryMatches, ...fallback]) {
     if (!seen.has(t.slug)) {
       seen.add(t.slug);
       ordered.push(t);
