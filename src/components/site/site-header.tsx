@@ -3,12 +3,22 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
-import { ChevronDown, ShoppingBag, UserRound } from "lucide-react";
+import { ShoppingBag, UserRound } from "lucide-react";
 import { Link, usePathname } from "@/i18n/navigation";
-import { destinations } from "@/lib/destinations";
+import { MAIN_NAV } from "@/lib/site-nav";
 import { cn } from "@/lib/utils";
+import { GroupPackagesMenu } from "./group-packages-menu";
+import { MobileNav } from "./mobile-nav";
+import { NavBadge } from "./nav-badge";
 
 const SCROLL_THRESHOLD = 40;
+const DARK_HERO_PAGES = new Set([
+  "/land-packages",
+  "/flight-promotions",
+  "/getaways",
+  "/mice",
+  "/member-exclusive",
+]);
 
 function pageAllowsTransparentHeader(pathname: string): boolean {
   // Pages whose first content under the header is a full-bleed dark hero.
@@ -17,7 +27,7 @@ function pageAllowsTransparentHeader(pathname: string): boolean {
   if (pathname === "/") return true;
   if (pathname.startsWith("/destinations/")) return true;
   if (pathname.startsWith("/tours/")) return true;
-  return false;
+  return DARK_HERO_PAGES.has(pathname);
 }
 
 export function SiteHeader() {
@@ -61,36 +71,25 @@ export function SiteHeader() {
           />
         </Link>
 
-        <nav className="ml-auto hidden items-center gap-8 text-[0.92rem] font-medium capitalize tracking-[0.01em] md:flex">
-          <DestinationsMenu
-            label={t("destinations")}
-            viewAllLabel={t("viewAllDestinations")}
-            isOpaque={isOpaque}
-            onOpenChange={setMenuOpen}
-          />
-
-          <NavLink href="/about" isOpaque={isOpaque}>
-            {t("about")}
-          </NavLink>
-
-          <NavLink href="/contact" isOpaque={isOpaque}>
-            {t("contact")}
-          </NavLink>
+        <nav className="ml-auto hidden items-center gap-6 text-[0.9rem] font-medium capitalize tracking-[0.01em] lg:flex xl:gap-7">
+          {MAIN_NAV.map((item) =>
+            item.mega ? (
+              <GroupPackagesMenu
+                key={item.key}
+                href={item.href}
+                isOpaque={isOpaque}
+                onOpenChange={setMenuOpen}
+              />
+            ) : (
+              <NavLink key={item.key} href={item.href} isOpaque={isOpaque}>
+                {t(item.key)}
+                {item.badge === "hot" && <NavBadge label={t("hot")} className="ml-1.5 -translate-y-2" />}
+              </NavLink>
+            )
+          )}
         </nav>
 
-        <div className="ml-auto flex items-center gap-3 md:ml-0 md:gap-4">
-          <Link
-            href="/tours"
-            className={cn(
-              "hidden h-10 items-center rounded-full px-5 text-[0.85rem] font-semibold capitalize tracking-[0.01em] transition-[background-color,color,border-color] duration-300 ease-out lg:inline-flex",
-              isOpaque
-                ? "bg-[color:var(--brand-text)] text-white hover:bg-[color:var(--brand-orange)]"
-                : "bg-[color:var(--brand-amber)] text-[color:var(--brand-text)] hover:bg-white"
-            )}
-          >
-            Find a Journey
-          </Link>
-
+        <div className="ml-auto flex items-center gap-2 lg:ml-0 lg:gap-3">
           <Link
             href="/sign-in"
             aria-label={t("signIn")}
@@ -115,6 +114,7 @@ export function SiteHeader() {
           >
             <ShoppingBag className="size-[18px]" />
           </Link>
+          <MobileNav isOpaque={isOpaque} />
         </div>
       </div>
       </header>
@@ -139,7 +139,7 @@ function NavLink({
     <Link
       href={href}
       className={cn(
-        "transition-colors duration-300 ease-out",
+        "inline-flex items-center whitespace-nowrap transition-colors duration-300 ease-out",
         isOpaque
           ? "text-[color:var(--brand-text)] hover:text-[color:var(--brand-orange)]"
           : "text-white hover:text-[color:var(--brand-amber)]"
@@ -147,91 +147,5 @@ function NavLink({
     >
       {children}
     </Link>
-  );
-}
-
-function DestinationsMenu({
-  label,
-  viewAllLabel,
-  isOpaque,
-  onOpenChange,
-}: {
-  label: string;
-  viewAllLabel: string;
-  isOpaque: boolean;
-  onOpenChange: (open: boolean) => void;
-}) {
-  return (
-    <div
-      className="group relative"
-      onMouseEnter={() => onOpenChange(true)}
-      onMouseLeave={() => onOpenChange(false)}
-      onFocus={() => onOpenChange(true)}
-      onBlur={(e) => {
-        if (!e.currentTarget.contains(e.relatedTarget as Node)) {
-          onOpenChange(false);
-        }
-      }}
-    >
-      <Link
-        href="/destinations"
-        aria-haspopup="true"
-        className={cn(
-          "inline-flex items-center gap-1.5 transition-colors duration-300 ease-out",
-          isOpaque
-            ? "text-[color:var(--brand-text)] hover:text-[color:var(--brand-orange)]"
-            : "text-white hover:text-[color:var(--brand-amber)]"
-        )}
-      >
-        {label}
-        <ChevronDown className="size-3 transition group-hover:rotate-180" aria-hidden />
-      </Link>
-
-      <div
-        role="menu"
-        aria-label={label}
-        className="invisible absolute left-1/2 top-full z-50 -translate-x-1/2 pt-4 opacity-0 transition duration-150 group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100"
-      >
-        <div className="rounded-[20px] bg-white p-7 shadow-[0_24px_60px_-22px_rgba(43,43,43,0.32)] ring-1 ring-[color:var(--brand-border)]">
-          <div className="grid gap-x-12 gap-y-6 md:grid-cols-[1fr_1fr]">
-            {destinations.map((country) => (
-              <div key={country.slug} className="min-w-[10rem]">
-                <Link
-                  href={`/destinations/${country.slug}`}
-                  className="mb-4 block font-display text-[1.15rem] font-bold capitalize tracking-[0.01em] text-[color:var(--brand-gold)] transition hover:text-[color:var(--brand-orange)]"
-                >
-                  {country.name}
-                </Link>
-                <ul className="space-y-2.5">
-                  {country.sectors.map((sector) => (
-                    <li key={sector.slug}>
-                      <Link
-                        href={`/destinations/${sector.slug}`}
-                        className="block whitespace-nowrap text-[0.82rem] font-medium normal-case tracking-normal text-[color:var(--brand-muted)] transition hover:text-[color:var(--brand-orange)]"
-                      >
-                        {sector.name}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-          <div className="mt-7 flex items-center justify-between border-t border-[color:var(--brand-divider)] pt-5">
-            <Link
-              href="/destinations"
-              className="inline-flex items-center text-[0.82rem] font-semibold capitalize tracking-[0.01em] text-[color:var(--brand-orange)] transition hover:text-[color:var(--brand-amber)]"
-            >
-              {viewAllLabel}
-              <span aria-hidden className="ml-2">→</span>
-            </Link>
-            <p className="text-[0.78rem] normal-case tracking-normal text-[color:var(--brand-muted)]">
-              {destinations.reduce((n, c) => n + c.sectors.length, 0)} regions
-              · 2 countries
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
   );
 }

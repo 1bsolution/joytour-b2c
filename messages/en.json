@@ -11,7 +11,18 @@
     "signIn": "Sign in",
     "account": "My account",
     "cart": "Cart",
-    "viewAllDestinations": "View all destinations"
+    "viewAllDestinations": "View all destinations",
+    "landPackages": "Land Packages",
+    "groupPackages": "Group Packages",
+    "flightPromotions": "Flight Promotions",
+    "getaways": "Getaways",
+    "mice": "MICE",
+    "memberExclusive": "Member Exclusive",
+    "hot": "Hot",
+    "menu": "Menu",
+    "viewAllGroupPackages": "View all group packages",
+    "regions": "{count} regions",
+    "groupPackagesBlurb": "Escorted small-group tours, planned by people who walk these routes every season."
   },
   "tours": {
     "listTitle": "Upcoming tours",
@@ -53,6 +64,7 @@
     "terms": "Terms & Conditions",
     "faq": "FAQ",
     "address": "1 Park Road #02-10 People's Park Complex, Singapore 059108",
-    "social": "Social"
+    "social": "Social",
+    "licence": "Travel Agent Licence {number}"
   }
 }

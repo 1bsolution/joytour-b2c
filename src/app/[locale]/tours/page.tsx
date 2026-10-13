@@ -30,6 +30,7 @@ export default async function ToursPage({
     countryParam === "china" || countryParam === "japan" ? countryParam : undefined;
 
   const tours = await listTours({
+    productType: "group",
     destinationSlug: destination,
     country: allowedCountry,
     minDuration: Number.isFinite(minDuration) ? minDuration : undefined,
@@ -46,9 +47,9 @@ export default async function ToursPage({
     <>
       <header className="bg-[color:var(--brand-cream)] px-5 pb-16 pt-28 md:px-8 md:pb-20 md:pt-32">
         <div className="mx-auto max-w-6xl">
-          <p className="kicker">Routes</p>
+          <p className="kicker">Group Packages</p>
           <h1 className="mt-4 max-w-3xl">
-            All <span className="text-[color:var(--brand-orange)]">Joytour routes</span>
+            Escorted <span className="text-[color:var(--brand-orange)]">group tours</span>
           </h1>
           <p className="mt-6 max-w-2xl text-[1.0625rem] leading-[1.7] text-[color:var(--brand-muted)]">
             Curated small-group itineraries through China and Japan, planned by people

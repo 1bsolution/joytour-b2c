@@ -19,6 +19,8 @@ export interface TourSummary {
   destinations: { name: string; slug: string }[];
   departures: { id: string; priceSgd: number }[];
   featured: boolean;
+  productType: ProductType;
+  tags: string[];
 }
 
 export interface TourDetail extends TourSummary {
@@ -28,8 +30,19 @@ export interface TourDetail extends TourSummary {
 // Backwards-compat alias used by `<TourCard>`.
 export type TourCardData = TourSummary;
 
+// "group" = escorted group tour, "land" = land package / free & easy.
+export type ProductType = "group" | "land";
+
+// Merchandising tags. A tour appears in a nav section when it carries the tag.
+export const TOUR_TAGS = {
+  getaways: "getaways",
+  flightPromo: "flight-promo",
+} as const;
+
 export interface TourFilters {
   destinationSlug?: string;
+  productType?: ProductType;
+  tag?: string;
   country?: "china" | "japan";
   minDuration?: number;
   maxDuration?: number;
@@ -64,6 +77,8 @@ interface RawTour {
   country: "china" | "japan";
   sectors: string[];
   featured?: boolean;
+  productType?: ProductType;
+  tags?: string[];
 }
 
 const RAW_TOURS: RawTour[] = [
@@ -471,6 +486,8 @@ function buildTour(raw: RawTour): TourDetail {
     destinations,
     departures: [],
     featured: raw.featured ?? false,
+    productType: raw.productType ?? "group",
+    tags: raw.tags ?? [],
   };
 }
 
@@ -480,19 +497,23 @@ export async function listFeaturedTours(limit = 6): Promise<TourSummary[]> {
   return TOURS.filter((t) => t.featured).slice(0, limit);
 }
 
+export function tourMatches(tour: TourSummary, filters: TourFilters): boolean {
+  if (filters.country && tour.country !== filters.country) return false;
+  if (filters.productType && tour.productType !== filters.productType) return false;
+  if (filters.tag && !tour.tags.includes(filters.tag)) return false;
+  if (filters.destinationSlug) {
+    const matches =
+      tour.country === filters.destinationSlug ||
+      tour.destinations.some((d) => d.slug === filters.destinationSlug);
+    if (!matches) return false;
+  }
+  if (filters.minDuration && tour.durationDays < filters.minDuration) return false;
+  if (filters.maxDuration && tour.durationDays > filters.maxDuration) return false;
+  return true;
+}
+
 export async function listTours(filters: TourFilters = {}): Promise<TourSummary[]> {
-  return TOURS.filter((t) => {
-    if (filters.country && t.country !== filters.country) return false;
-    if (filters.destinationSlug) {
-      const matches =
-        t.country === filters.destinationSlug ||
-        t.destinations.some((d) => d.slug === filters.destinationSlug);
-      if (!matches) return false;
-    }
-    if (filters.minDuration && t.durationDays < filters.minDuration) return false;
-    if (filters.maxDuration && t.durationDays > filters.maxDuration) return false;
-    return true;
-  });
+  return TOURS.filter((t) => tourMatches(t, filters));
 }
 
 export async function getTourBySlug(slug: string): Promise<TourDetail | null> {

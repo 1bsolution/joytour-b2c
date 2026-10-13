@@ -2,6 +2,10 @@ import Image from "next/image";
 import { getTranslations } from "next-intl/server";
 import { Mail, MapPin, Phone } from "lucide-react";
 import { Link } from "@/i18n/navigation";
+import { whatsappHref } from "@/lib/whatsapp";
+
+// STB TRUST register: JOYTOUR HOLIDAYS PTE. LTD., General licence.
+const TRAVEL_AGENT_LICENCE = "TA02991";
 
 export async function SiteFooter() {
   const t = await getTranslations("footer");
@@ -81,7 +85,9 @@ export async function SiteFooter() {
 
       <div className="border-t border-white/12">
         <div className="mx-auto flex max-w-6xl flex-col gap-3 px-5 py-6 text-[0.78rem] text-white/55 md:flex-row md:items-center md:justify-between md:px-8">
-          <span>{t("rights", { year })}</span>
+          <span>
+            {t("rights", { year })} · {t("licence", { number: TRAVEL_AGENT_LICENCE })}
+          </span>
           <span className="text-white/72">From Singapore, with care.</span>
         </div>
       </div>
@@ -92,7 +98,7 @@ export async function SiteFooter() {
 const socials = [
   { label: "Instagram", short: "IG", href: "https://instagram.com" },
   { label: "Facebook", short: "FB", href: "https://facebook.com" },
-  { label: "WhatsApp", short: "WA", href: "https://wa.me/6586299765" },
+  { label: "WhatsApp", short: "WA", href: whatsappHref() },
 ];
 
 function FooterColumn({
